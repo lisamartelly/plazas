@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 // tailwind.config.js
 module.exports = {
   content: ['./layouts/**/*.html', './content/**/*.md'],
-  darkMode: 'class',
+  darkMode: 'false',
   theme: {
     extend: {
       colors: {
@@ -48,6 +48,31 @@ module.exports = {
           800: '#1E2024',
           900: '#050506'
         },
+        green: {
+          medium: '#82A860',
+          dark: '#728E55',
+        },
+        red: {
+          medium: '#D25954'
+        },
+        orange: {
+          medium: '#E76F51',
+          lightest: '#FEE6C5',
+        },
+        yellow: {
+          medium: '#FEB705',
+          light: '#E9C36A',
+          lightest: '#FDFCDC',
+        },
+        blue: {
+          pleasantdark: '#2A4953',
+          superdark: '#003246',
+          darkest: '#34596C',
+          dark: '#0281A6',
+          medium: '#01AEB9',
+          light: '#7CC5C9',
+          lightest: '#D0E7DF',
+        }
         // To change these, use https://www.tailwindshades.com/ with https://tailwindcss.com/docs/customizing-colors or create your own custom colors.
       },
       lineHeight: {

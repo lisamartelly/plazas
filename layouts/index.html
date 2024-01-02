@@ -1,72 +1,104 @@
 {{ define "main" }}
 <main>
-    <div class="bg-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl px-4 py-8 mx-auto">
-            <div class="grid items-center gap-8 mb-8 sm:mb-0 lg:gap-12 lg:grid-cols-12">
-                <div class="col-span-6 px-4 text-center sm:mb-6 lg:text-left lg:mb-0">
-                    <h1 class="mb-2 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl xl:text-6xl dark:text-white">
-                        {{ .Site.Title }}
+<style>
+    html {
+        scroll-behavior: smooth
+    }
+    main {
+        font-family: 'Montserrat';
+    }
+    #main-hero {
+        background-image: url(https://drive.google.com/uc?id=1h9tBbGVglL-W1QYZ5H9hqMlByuSVJYPn);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-origin: border-box;
+        background-position: bottom right;
+        min-height: 300px;
+        height: 600px;
+        max-height: 100vh;
+    }
+
+    #results-container {
+        padding: 10px;
+        background-color: #81b5ccc7;
+    }
+
+    .script-header {
+        margin: 24px 0 16px 0;
+    }
+
+    .script-blockquote {
+        margin-left: 3px;
+        border-left: 3px solid #34596C;
+        padding-left: 14px;
+        font-style: italic;
+    }
+
+    .script-blockquote p {
+        margin: 7px 0;
+    }
+
+    .rep-name {
+        font-weight: 500;
+    }
+
+    .rep-phone, .rep-email {
+        margin-left: 8px;
+    }
+
+    .rep-phone {
+        margin-bottom: 10px;
+    }
+
+</style>
+
+    <div class="bg-yellow-lightest">
+            <div id="main-hero" class="flex justify-center lg:justify-start sm:items-start lg:items-center">
+                <div class="col-span-6 p-4 text-center sm:mb-6 lg:text-left lg:mb-0 lg:bg-white lg:bg-opacity-80 mx-3 rounded-lg">
+                    <h1 class="mb-2 text-4xl font-extrabold leading-none tracking-tight text-blue-superdark md:text-5xl xl:text-6xl dark:text-white">
+                        People For Plazas!
                     </h1>
-                    <h2 class="pb-2 text-3xl font-light text-gray-800 dark:text-gray-300 md:text-4xl">
-                        {{ .Site.Params.Moto }}
+                    <h2 class="pb-2 text-3xl font-light text-blue-superdark dark:text-gray-300 md:text-4xl">
+                        Give the public spaces we deserve.
                     </h2>
-                    <p class="max-w-xl mx-auto mb-6 font-normal text-gray-900 lg:mx-0 xl:mb-2 md:text-lg xl:text-xl dark:text-gray-50">
-                        {{ .Site.Params.Description}}
-                    </p>
-                </div>
-                <div class="col-span-6">
-                    {{ $hero := resources.GetMatch "images/pages/tailbliss-rocket-indigo.png" }}
-
-                    {{ $thumb := ($hero.Fill "400x400 webp q90") }}
-                    {{ $large := ($hero.Fill "576x576 webp q90") }}
-
-                    <img srcset="
-                        {{- with $thumb.RelPermalink -}}{{.}} 400w{{- end -}}
-                        {{- with $large.RelPermalink -}}, {{.}} 576w{{- end -}}" src="{{ $hero.RelPermalink }}" width="100%" height="" alt="TailBliss Hero" class="w-full max-w-xl mx-auto rounded-lg" />
                 </div>
             </div>
-        </div>
     </div>
 
-    <!-- More main page content here... -->
-
-    <!-- Our mission section -->
-    <div class="relative my-4">
+    <!-- Vital life section -->
+    <div id="about-start" class="relative py-8 bg-blue-lightest">
         <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
             <div class="relative sm:py-8 lg:py-0">
                 <div aria-hidden="true" class="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen">
-                    <div class="absolute inset-y-0 w-full bg-gray-50 dark:bg-gray-900/10 right-1/2 rounded-r-3xl lg:right-72"></div><svg class="absolute -ml-3 top-8 left-1/2 lg:-right-8 lg:left-auto lg:top-12" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
+                    <div class="absolute inset-y-0 w-full bg-blue-darkest dark:bg-gray-900/10 right-1/2 rounded-r-3xl lg:right-72"></div><svg class="absolute -ml-3 top-8 left-1/2 lg:-right-8 lg:left-auto lg:top-12" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
                         <defs>
                             <pattern id="02f20b47-fd69-4224-a62a-4c9de5c763f7" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                                <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-gray-900/60" fill="currentcolor"></rect>
+                                <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="#82A860"></rect>
                             </pattern>
                         </defs>
                         <rect width="404" height="392" fill="url(#02f20b47-fd69-4224-a62a-4c9de5c763f7)"></rect>
                     </svg>
                 </div>
-                <div class="relative w-full h-auto px-4 py-6 mx-auto sm:max-w-3xl sm:px-6 lg:px-0 lg:py-20">
-                    <div class="overflow-hidden shadow-xl rounded-2xl">
-                        {{ $p1image := resources.Get .Site.Params.P1.Image }}
-                        {{ with $p1image }}
-                        {{ with .Resize (printf "%dx%d webp q90" .Width .Height) }}
-                        <img imgh src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" class="w-full h-auto" alt="P1" loading="lazy" />
-                        {{ end }}
-                        {{ end }}
-                    </div>
+                <div class="relative w-full h-auto px-4 py-6 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
+                        <svg id="Layer_13" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 380" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{stroke:url(#linear-gradient-29);}.cls-1,.cls-2,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9,.cls-10,.cls-11,.cls-12,.cls-13,.cls-14,.cls-15,.cls-16,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32{fill:none;stroke-miterlimit:10;}.cls-1,.cls-3,.cls-4,.cls-5,.cls-6,.cls-7,.cls-8,.cls-9,.cls-10,.cls-11,.cls-12,.cls-13,.cls-15,.cls-16,.cls-17,.cls-18,.cls-19,.cls-20,.cls-21,.cls-22,.cls-23,.cls-24,.cls-25,.cls-26,.cls-27,.cls-28,.cls-29,.cls-30,.cls-31,.cls-32{stroke-linecap:round;stroke-width:1.78px;}.cls-2{stroke-width:4.76px;}.cls-2,.cls-14{stroke:#264653;}.cls-33{fill:#fff;}.cls-34{fill:#fed9b7;}.cls-35{fill:#fb8500;}.cls-3{stroke:url(#linear-gradient-15);}.cls-4{stroke:url(#linear-gradient-5);}.cls-5{stroke:url(#linear-gradient-16);}.cls-6{stroke:url(#linear-gradient-12);}.cls-7{stroke:url(#linear-gradient-25);}.cls-8{stroke:url(#linear-gradient-23);}.cls-36{fill:#82a860;}.cls-9{stroke:url(#linear-gradient-24);}.cls-10{stroke:url(#linear-gradient-11);}.cls-11{stroke:url(#linear-gradient-3);}.cls-37{fill:#ffb703;}.cls-12{stroke:url(#linear-gradient);}.cls-13{stroke:url(#linear-gradient-2);}.cls-14{stroke-width:2.86px;}.cls-38{fill:#f9ab75;}.cls-15{stroke:url(#linear-gradient-19);}.cls-16{stroke:url(#linear-gradient-26);}.cls-39{fill:#f4a261;}.cls-40{fill:#1b4559;}.cls-17{stroke:url(#linear-gradient-6);}.cls-18{stroke:url(#linear-gradient-27);}.cls-41{fill:#8ecae6;}.cls-19{stroke:url(#linear-gradient-13);}.cls-20{stroke:url(#linear-gradient-17);}.cls-21{stroke:url(#linear-gradient-14);}.cls-22{stroke:url(#linear-gradient-22);}.cls-42{fill:#e76f51;}.cls-23{stroke:url(#linear-gradient-8);}.cls-43{fill:#023047;}.cls-24{stroke:url(#linear-gradient-20);}.cls-44{fill:#e9c46a;}.cls-25{stroke:url(#linear-gradient-7);}.cls-26{stroke:url(#linear-gradient-28);}.cls-27{stroke:url(#linear-gradient-9);}.cls-28{stroke:url(#linear-gradient-30);}.cls-29{stroke:url(#linear-gradient-4);}.cls-30{stroke:url(#linear-gradient-10);}.cls-31{stroke:url(#linear-gradient-18);}.cls-32{stroke:url(#linear-gradient-21);}.cls-45{fill:#00afb9;}.cls-46{fill:#264653;}.cls-47{fill:#f07167;}.cls-48{fill:#d35a54;}.cls-49{fill:#e89256;}</style><linearGradient id="linear-gradient" x1="-157.13" y1="363.04" x2="-157.13" y2="320.62" gradientTransform="translate(270.69) rotate(-180) scale(1 -1)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#2a9d8f"/><stop offset="1" stop-color="#264653"/></linearGradient><linearGradient id="linear-gradient-2" x1="-141.54" x2="-141.54" y2="314.88" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-3" x1="-149.56" x2="-149.56" y2="319.35" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-4" x1="-153.38" x2="-153.38" y2="327.45" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-5" x1="-145.55" x2="-145.55" y2="315.16" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-6" x1="-137.68" x2="-137.68" y2="319.07" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-7" x1="-122.08" x2="-122.08" y2="307.15" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-8" x1="-130.1" x2="-130.1" y2="328.4" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-9" x1="-133.92" x2="-133.92" y2="325.9" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-10" x1="-126.09" x2="-126.09" y2="309.75" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-11" x1="-118.22" x2="-118.22" y2="304.99" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-12" x1="-102.63" x2="-102.63" y2="307.15" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-13" x1="-110.64" x2="-110.64" y2="314.32" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-14" x1="-114.46" x2="-114.46" y2="311.82" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-15" x1="-106.63" x2="-106.63" y2="309.75" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-16" x1="-98.76" x2="-98.76" y2="319.07" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-17" x1="-83.17" x2="-83.17" y2="314.12" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-18" x1="-91.18" x2="-91.18" y2="321.28" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-19" x1="-95" x2="-95" y2="318.78" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-20" x1="-87.17" x2="-87.17" y2="316.72" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-21" x1="-79.3" x2="-79.3" y2="311.95" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-22" x1="-63.71" x2="-63.71" y2="321.24" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-23" x1="-71.72" x2="-71.72" y2="321.28" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-24" x1="-75.54" x2="-75.54" y2="318.78" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-25" x1="-67.71" x2="-67.71" y2="323.83" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-26" x1="-59.84" x2="-59.84" y2="319.07" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-27" x1="-44.25" x2="-44.25" y2="321.24" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-28" x1="-52.26" x2="-52.26" y2="328.4" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-29" x1="-56.08" x2="-56.08" y2="325.9" xlink:href="#linear-gradient"/><linearGradient id="linear-gradient-30" x1="-48.25" x2="-48.25" y2="323.83" xlink:href="#linear-gradient"/></defs><rect class="cls-41" x="95.15" y="49.71" width="276.01" height="276.01" rx="43.7" ry="43.7" transform="translate(18.87 -21.29) rotate(5.45)"/><ellipse class="cls-39" cx="224.08" cy="340.69" rx="200.11" ry="34"/><ellipse class="cls-49" cx="230.56" cy="333.59" rx="92.28" ry="16.01"/><path class="cls-33" d="m223.33,159.83c-9.53,0-19.82,1.3-23.13,6.48-1.05,1.65-1.14,3.49-.25,5.33,1.93,3.98,7.67,6.8,13.95,6.86,44.84.4,169.4.99,170.66.99,11.99,0,18.77-4.87,19.07-9.45.23-3.63-3.59-8.1-14.99-9.77-9.72-1.43-26.79,7.81-26.96,7.9-.17.09-.37.05-.49-.1-.13-.15-.14-.37-.04-.54.1-.17,9.83-16.67,4.33-27.6-3.22-6.39-10.99-9.7-23.1-9.82-.17,0-.33,0-.5,0-26.71,0-48.1,22.1-48.31,22.33-.13.14-.34.17-.5.07-.16-.1-.24-.3-.19-.5.03-.11,2.73-11.56-2.98-19.51-3.7-5.15-10.09-7.76-18.99-7.76-28.45,0-30.8,35.38-30.82,35.74,0,.12-.06.24-.15.31-.09.08-.2.12-.31.1-3.23-.4-9.57-1.04-16.29-1.04Z"/><path class="cls-33" d="m84.01,193.42c-9.53,0-19.82,1.3-23.13,6.48-1.05,1.65-1.14,3.49-.25,5.33,1.93,3.98,7.67,6.8,13.95,6.86,44.84.4,169.4.99,170.66.99,11.99,0,18.77-4.87,19.07-9.45.23-3.63-3.59-8.1-14.99-9.77-9.72-1.43-26.79,7.81-26.96,7.9-.17.09-.37.05-.49-.1-.13-.15-.14-.37-.04-.54.1-.17,9.83-16.67,4.33-27.6-3.22-6.39-10.99-9.7-23.1-9.82-.17,0-.33,0-.5,0-26.71,0-48.1,22.1-48.31,22.33-.13.14-.34.17-.5.07-.16-.1-.24-.3-.19-.5.03-.11,2.73-11.56-2.98-19.51-3.7-5.15-10.09-7.76-18.99-7.76-28.45,0-30.8,35.38-30.82,35.74,0,.12-.06.24-.15.31-.09.08-.2.12-.31.1-3.23-.4-9.57-1.04-16.29-1.04Z"/><g><g><path class="cls-46" d="m338.3,264.45c1.4-5.53,2.14-11.5,2.48-14.75.14-1.34-.86-2.52-2.2-2.61h0c-1.29-.09-2.41.85-2.54,2.13-.32,3.11-1.04,8.87-2.35,14.06l4.62,1.17Z"/><path class="cls-46" d="m214.14,284.89h4.76v-8.52c5.65-4.7,7.71-20,8.36-26.69.13-1.33-.86-2.5-2.2-2.6h0c-1.29-.09-2.41.86-2.54,2.15-1.03,10.67-3.85,22.2-7.03,23.73l-1.35.65v11.28Z"/><path class="cls-2" d="m203.2,282.5c-5.62,1.86-9.68,7.15-9.68,13.4l.03,13.01"/><path class="cls-2" d="m221.77,308.9l-.03-13.01c0-6-3.74-11.12-9.02-13.16"/><circle class="cls-2" cx="207.64" cy="283.41" r="4.45"/><rect class="cls-46" x="217.89" y="308.2" width="8.23" height="2.07" transform="translate(444.01 618.46) rotate(180)"/><rect class="cls-46" x="189.37" y="308.2" width="8.23" height="2.07" transform="translate(386.98 618.46) rotate(180)"/><path class="cls-2" d="m198.29,284.89v-9.78c-1.67-.8-3.03-2.9-4.15-5.62-.44-1.07-.66-2.01-.66-3.17v.28"/><line class="cls-14" x1="220.98" y1="267.74" x2="195.1" y2="267.74"/><line class="cls-14" x1="220.98" y1="303.71" x2="195.1" y2="303.71"/><g><path class="cls-2" d="m338.63,247.09s-1.79,24.76-8.57,28.02v9.78"/><path class="cls-2" d="m316.73,282.5c-5.62,1.86-9.68,7.15-9.68,13.4l.03,13.01"/><path class="cls-2" d="m335.3,308.9l-.03-13.01c0-6-3.74-11.12-9.02-13.16"/><circle class="cls-2" cx="321.18" cy="283.41" r="4.45"/><rect class="cls-46" x="331.43" y="308.2" width="8.23" height="2.07" transform="translate(671.08 618.46) rotate(180)"/><rect class="cls-46" x="302.91" y="308.2" width="8.23" height="2.07" transform="translate(614.06 618.46) rotate(180)"/><path class="cls-2" d="m311.83,284.89v-9.78c-1.67-.8-3.03-2.9-4.15-5.62-.44-1.07-.66-2.01-.66-3.17v.28"/><line class="cls-14" x1="334.52" y1="267.74" x2="308.64" y2="267.74"/></g><path class="cls-39" d="m214.24,257.77h129.51c1.4,0,2.58-1.06,2.73-2.45l.99-9.02c.18-1.63-1.1-3.05-2.73-3.05h-128.9l-1.6,14.52Z"/><path class="cls-42" d="m214.21,257.77h126.42c1.41,0,2.59-1.06,2.74-2.46l.99-9.01c.18-1.63-1.1-3.06-2.74-3.06h-126.42c-1.41,0-2.59,1.06-2.74,2.46l-.99,9.01c-.18,1.63,1.1,3.06,2.74,3.06Z"/><path class="cls-42" d="m179.59,272.99h158.94c1.17,0,2.12.95,2.12,2.12h0c0,1.17-.95,2.12-2.12,2.12h-158.94v-4.24h0Z" transform="translate(520.24 550.22) rotate(180)"/><line class="cls-14" x1="334.12" y1="303.71" x2="308.24" y2="303.71"/></g><rect class="cls-46" x="316.42" y="300.94" width="9.84" height="5.52" rx="2.76" ry="2.76" transform="translate(642.67 607.41) rotate(-180)"/><rect class="cls-46" x="203.12" y="300.94" width="9.84" height="5.52" rx="2.76" ry="2.76" transform="translate(416.08 607.41) rotate(180)"/><rect class="cls-42" x="306.42" y="272.99" width="17.56" height="4.24" rx="2.12" ry="2.12" transform="translate(630.4 550.22) rotate(-180)"/><rect class="cls-39" x="323.21" y="272.99" width="20.62" height="4.24" rx="2.12" ry="2.12" transform="translate(667.04 550.22) rotate(-180)"/><rect class="cls-39" x="299.57" y="272.99" width="19.33" height="4.24" rx="2.12" ry="2.12" transform="translate(618.47 550.22) rotate(-180)"/></g><ellipse class="cls-38" cx="95.29" cy="326.86" rx="4.57" ry="1.64"/><ellipse class="cls-38" cx="357.02" cy="325.22" rx="4.57" ry="1.64"/><ellipse class="cls-38" cx="111.2" cy="330.96" rx="11.41" ry="4.1"/><ellipse class="cls-38" cx="326.65" cy="319.68" rx="11.41" ry="4.1"/><g><rect class="cls-43" x="37.03" y="309.33" width="85.73" height="4.13"/><g><path class="cls-43" d="m83.09,295.32c-.92,0-1.66.74-1.66,1.66v39.74c0,.92.74,1.66,1.66,1.66h21.11v-43.06h-21.11Z"/><path class="cls-40" d="m119.57,336.72v-39.74c0-.92-.74-1.66-1.66-1.66h-13.71v43.06h13.71c.92,0,1.66-.74,1.66-1.66Z"/></g><g><path class="cls-43" d="m40.49,295.32c-.92,0-1.66.74-1.66,1.66v39.74c0,.92.74,1.66,1.66,1.66h21.11v-43.06h-21.11Z"/><path class="cls-40" d="m76.97,336.72v-39.74c0-.92-.74-1.66-1.66-1.66h-13.71v43.06h13.71c.92,0,1.66-.74,1.66-1.66Z"/></g><rect class="cls-43" x="36.7" y="342.12" width="86.97" height="4.21"/><rect class="cls-43" x="78.49" y="297.85" width="1.69" height="46.83"/><polygon class="cls-43" points="37.01 297.85 37.01 344.68 43.25 344.68 37.01 349.81 37.01 359.47 34.41 359.47 34.41 297.85 37.01 297.85"/><polygon class="cls-43" points="121.07 297.85 121.07 344.68 114.83 344.68 121.07 349.81 121.07 359.47 123.67 359.47 123.67 297.85 121.07 297.85"/><path class="cls-43" d="m31.87,321.27h2.54v-17.6h-1.13c-.44,0-.81.32-.87.75l-.49,3.24c-.06.38-.27.72-.59.94l-1.98,1.36c-.44.3-.66.82-.59,1.35l1.23,8.34c.14.93.94,1.63,1.88,1.63Z"/></g><g><path class="cls-43" d="m258.64,325.21s.97,4.44,2.51,5.79,6.18,8.11,6.18,10.24,0,11.59-13.33,22.21c-13.33,10.62-15.07,1.74-11.78-5.41s6.76-14.68,5.99-17.19c-.77-2.51-.65-7.36-.65-7.36l11.08-8.29Z"/><path class="cls-43" d="m253.74,324.26l-8.91,10.42-.55,3.21s2.95,1.56,12.34-1.55c9.39-3.11,8.31-7.82,8.31-7.82l-11.19-4.27Z"/><path class="cls-43" d="m313.24,336.35l1.35,5.99s.97,11.78.97,16.42l-27.19,1.07c-1.1.04-1.95-.98-1.68-2.05.51-2.07,1.37-4.98,2.22-5.59,1.35-.97,8.5-4.64,9.46-8.31.97-3.67.97-6.57.97-6.57l13.91-.97Z"/><path class="cls-34" d="m212.83,57.25l-2.57-10.38-4.11-8.53s1.64-2.57,3.34,0l3.34,5.76-3.34-11.2s.57-2.16,2.42-.72l4.29,10.58-1.93-14.28s1.75-2.06,3.6,0l2.57,13.93-.72-13.01s0-2.14,1.54-1.84c1.54.3,1.85,2.46,1.85,2.46l2.78,17.58,6.12-6.78s.98-1.44,3.65.51c0,0-5.14,7.3-5.35,9.25s1.44,11.31-3.7,13.77c-5.14,2.47-13.77-7.09-13.77-7.09Z"/><path class="cls-34" d="m263.54,80.32s-.08,22.65,7.29,28.15c15.97,11.94,21.02-12.11,21.02-12.11l-28.3-16.04Z"/><path class="cls-43" d="m298.23,76.69s7.06,7.9,2.52,16.81-9.92,16.65-9.92,16.65h-11.94s-1.85-12.44-10.26-19c-8.41-6.56-11.6-11.94-7.57-22.53,4.04-10.59,18.83-11.1,29.93-3.53,0,0-1.51-3.36-4.71-4.2,0,0,10.76,1.18,11.94,15.81Z"/><path class="cls-45" d="m316,220.65s-1.04,48.85,0,54.03c1.04,5.18-.46,60.24-.23,63.97,0,0-13.43,3.11-21.09-1.24,0,0-2.28-40.78-6.21-49.06-3.93-8.28-2.48-47.82-2.48-47.82l-26.08,33.95s4.09,41.43,5.03,54.06c0,0-13.61.26-20.64,9.36,0,0-6.74-30.3-11.09-48.52-4.35-18.22-1.86-23.81,7.45-42.85,9.32-19.04,17.39-34.36,17.39-34.36l57.96,8.49Z"/><path class="cls-34" d="m347.14,192.62s.64,6.36,3.5,7.64c2.86,1.27,5.52,8.6,4.4,12.9-1.11,4.29-8.27,6.17-12.47,8.41-3.77,2.01-7.64-6.06-7-12.57.64-6.5,3.98-7.79-.31-11.61-4.29-3.82,11.88-4.77,11.88-4.77Z"/><path class="cls-47" d="m351.09,195.3s-.37-15.35-7.49-41.56c-7.11-26.21-32.2-41.19-32.2-41.19-23.77-7.07-44.32-1.4-44.32-1.4h0l-25.32-14.32-7.49-42.68c-16.1-12.36-25.09,2.25-25.09,2.25l9.95,52.17c.59,3.08,2.17,5.88,4.5,7.98l30.48,27.42s-.75,25.51-5.99,37.87c-5.24,12.36-9.36,31.83-9.36,31.83,18.72,18.35,53.54,25.09,53.54,25.09l7.86-14.6,3,11.98,22.84-16.85c1.5-8.61-7.49-61.41-7.49-61.41,8.99,13.1,15.35,43.81,15.35,43.81l17.22-6.37Z"/><path class="cls-48" d="m318.51,157.86c8.99,13.1,15.35,43.81,15.35,43.81l17.22-6.37s-.37-15.35-7.49-41.56c-7.11-26.21-32.2-41.19-32.2-41.19-1.89-.56-3.75-1.03-5.59-1.44,3.78,9.64,11.36,30.6,12.7,46.75Z"/><path class="cls-48" d="m267.08,111.15s32.75-12.88,38.73-.04c0,0-15.15-4.28-38.73.04Z"/><path class="cls-48" d="m247.69,182.88l23.53,7.86-10.16,18.09-19.91-5.16s2.66-16.42,6.55-20.79Z"/></g><path class="cls-36" d="m314.94,362.88s-13.87-54.39,15.59-45.18c0,0-.71-17.04,15.22-17.04s19.03,17.87,19.03,17.87c0,0-1.05-24.84,13.92-24.44,22.73.6,18.36,52.2,18.36,52.2,0,0-9.53-33.97,19.56-26.67,29.94,7.52-10.61,43.32-10.61,43.32l-91.07-.06Z"/><g><line class="cls-12" x1="427.83" y1="321.51" x2="427.83" y2="362.15"/><line class="cls-13" x1="412.24" y1="315.77" x2="412.24" y2="362.15"/><line class="cls-11" x1="420.25" y1="320.25" x2="420.25" y2="362.15"/><line class="cls-29" x1="424.07" y1="328.35" x2="424.07" y2="362.15"/><line class="cls-4" x1="416.24" y1="316.05" x2="416.24" y2="362.15"/><line class="cls-17" x1="408.37" y1="319.96" x2="408.37" y2="362.15"/><line class="cls-25" x1="392.78" y1="308.04" x2="392.78" y2="362.15"/><line class="cls-23" x1="400.8" y1="329.29" x2="400.8" y2="362.15"/><line class="cls-27" x1="404.61" y1="326.79" x2="404.61" y2="362.15"/><line class="cls-30" x1="396.78" y1="310.64" x2="396.78" y2="362.15"/><line class="cls-10" x1="388.91" y1="305.88" x2="388.91" y2="362.15"/><line class="cls-6" x1="373.32" y1="308.04" x2="373.32" y2="362.15"/><line class="cls-19" x1="381.34" y1="315.21" x2="381.34" y2="362.15"/><line class="cls-21" x1="385.15" y1="312.71" x2="385.15" y2="362.15"/><line class="cls-3" x1="377.32" y1="310.64" x2="377.32" y2="362.15"/><line class="cls-5" x1="369.45" y1="319.96" x2="369.45" y2="362.15"/><line class="cls-20" x1="353.86" y1="315.01" x2="353.86" y2="362.15"/><line class="cls-31" x1="361.88" y1="322.17" x2="361.88" y2="362.15"/><line class="cls-15" x1="365.69" y1="319.68" x2="365.69" y2="362.15"/><line class="cls-24" x1="357.86" y1="317.61" x2="357.86" y2="362.15"/><line class="cls-32" x1="349.99" y1="312.84" x2="349.99" y2="362.15"/><line class="cls-22" x1="334.4" y1="322.13" x2="334.4" y2="362.15"/><line class="cls-8" x1="342.42" y1="322.17" x2="342.42" y2="362.15"/><line class="cls-9" x1="346.23" y1="319.68" x2="346.23" y2="362.15"/><line class="cls-7" x1="338.41" y1="324.73" x2="338.41" y2="362.15"/><line class="cls-16" x1="330.53" y1="319.96" x2="330.53" y2="362.15"/><line class="cls-18" x1="314.94" y1="322.13" x2="314.94" y2="362.15"/><line class="cls-26" x1="322.96" y1="329.29" x2="322.96" y2="362.15"/><line class="cls-1" x1="326.77" y1="326.79" x2="326.77" y2="362.15"/><line class="cls-28" x1="318.95" y1="324.73" x2="318.95" y2="362.15"/><path class="cls-44" d="m382.67,312.42c.29.01.55-.05.8-.18.26-.08.48-.23.67-.43.2-.19.35-.41.43-.67.13-.25.19-.51.18-.8l-.07-.55c-.1-.35-.28-.66-.53-.92l-.42-.33c-.32-.19-.67-.28-1.05-.28-.29-.01-.55.05-.8.18-.26.08-.48.23-.67.43-.2.19-.35.41-.43.67-.13.25-.19.51-.18.8l.07.55c.1.35.28.66.53.92l.42.33c.32.19.67.28,1.05.28h0Z"/><path class="cls-44" d="m368.31,323.15c2.67,0,2.67-4.15,0-4.15s-2.67,4.15,0,4.15h0Z"/><path class="cls-44" d="m387.72,314.17c-.07-.02-.13-.04-.2-.06l.92.54c-.35-.34-.67-.47-1.11-.65l1,.58c-.65-.5-1.23-.84-2.08-.8-.48.02-.94.11-1.37.35-.27.15-.49.35-.73.54l.46-.36-.08.06c-.57.44-.95.88-1.05,1.61-.08.63.07,1.43.61,1.85.23.18.45.38.7.53.42.27.98.37,1.47.36,1-.02,1.95-.53,2.43-1.42l-.35.46c.31-.35.51-.64.65-1.1l-.54.92c.05-.05.09-.11.14-.17.45-.55.7-1.18.5-1.9-.18-.65-.71-1.19-1.36-1.36h0Z"/><path class="cls-37" d="m375.93,308.91c-.52-.21-1.02-.3-1.59-.15-.18.05-.35.11-.52.17-.45.15-.82.39-1.11.76s-.48.83-.46,1.29c.02.38.11.74.29,1.08.26.49.77.81,1.27.98.17.06.35.12.52.17.4.11.9.11,1.3-.03.1-.03.2-.08.29-.12l.52-.22c.25-.14.45-.32.61-.56.28-.36.48-.84.46-1.31-.02-.38-.12-.75-.29-1.09-.14-.25-.32-.45-.56-.61-.21-.19-.45-.32-.73-.39h0Z"/><path class="cls-44" d="m361.81,311.14c-1.06-.24-2.16-.63-3.26-.31-1.81.53-1.82,3.15,0,3.68,1.1.32,2.19-.07,3.26-.31,1.51-.34,1.51-2.72,0-3.06h0Z"/><path class="cls-44" d="m339.65,325.28c-.09.05-.19.11-.28.16l-.03.02-.41.32c-.27.25-.31.39-.44.69-.05.13-.11.25-.16.38-.09.35-.09.7,0,1.05.09.33.26.62.51.87.25.24.54.41.87.51.35.09.7.09,1.05,0,.04-.02.09-.04.13-.05l.49-.21c.09-.04.17-.1.24-.18.15-.09.28-.21.37-.37.07-.07.13-.15.18-.24.05-.09.11-.19.16-.28l.2-.47c.08-.26.09-.52.03-.78,0-.18-.04-.34-.13-.49-.08-.24-.21-.45-.4-.63l-.39-.3-.47-.2c-.26-.08-.52-.09-.78-.03-.26.01-.5.09-.72.23h0Z"/><path class="cls-37" d="m335.56,317.36c-.76-.19-1.46-.28-2.25-.18-.83.11-1.48.4-2.22.76-1.74.84-.81,3.46.95,3.49.71.01,1.58,0,2.35-.32.31-.13.66-.22.95-.4.32-.2.62-.49.91-.72.94-.75.37-2.37-.69-2.63h0Z"/><path class="cls-37" d="m383.61,295.75c-.2.02-.39.03-.59,0l.55.07c-.38-.08-.77-.18-1.16-.18-.64,0-1.38.29-1.81.77-.6.69-.8,1.66-.32,2.48.57.97,1.83,1.45,2.91,1.12.49-.15.97-.42,1.39-.73.67-.49,1.15-1.3.88-2.15-.1-.31-.27-.6-.49-.84-.29-.32-.91-.61-1.35-.56h0Z"/><path class="cls-44" d="m394.4,308.5c-.16,0-.33-.02-.49-.04l.56.08c-.24-.04-.47-.1-.71-.18-.46-.16-1.01-.07-1.44.11s-.81.48-1.06.9c-.21.36-.28.7-.3,1.11-.02.53.26,1.2.65,1.56.46.42.95.59,1.56.65s1.19-.02,1.77-.15c1-.22,1.61-1.3,1.48-2.26-.14-1.02-.99-1.76-2.02-1.79h0Z"/><path class="cls-44" d="m361.6,300.97c-.71-.05-1.55-.23-2.24.02-.72.26-1.36.91-1.32,1.73s.54,1.45,1.32,1.73c.68.25,1.52.07,2.24.02.91-.07,1.8-.76,1.75-1.75s-.77-1.68-1.75-1.75h0Z"/><path class="cls-44" d="m352.1,304.86c-.63.21-1.37.38-1.81.91-.23.27-.43.56-.53.91-.12.45-.07.92.1,1.34.14.34.34.6.63.82.13.13.28.22.45.26.25.13.51.19.79.18-1.08-.13-2.3-1.69-1.62-.81.27.35.64.62,1.07.74s.92.1,1.34-.04.78-.34,1.17-.52c.43-.2.85-.79.95-1.24s.08-.91-.1-1.35c-.38-.9-1.46-1.54-2.45-1.2h0Z"/><path class="cls-44" d="m353.86,326.05c-.26-.02-.21-.02.14.02-.1-.02-.2-.05-.3-.08-.18-.04-.37-.08-.55-.12-.35-.08-.73-.18-1.08-.18-.8.09-.91.12-.32.06-.1,0-.2,0-.3-.01-.89-.06-1.75.62-2.08,1.4-.36.85-.17,1.82.47,2.49.29.3.58.63.94.84.5.29,1.21.43,1.78.42.88-.01,1.69-.27,2.42-.76.78-.53,1.31-1.51,1-2.47s-1.11-1.52-2.11-1.61h0Z"/><path class="cls-37" d="m349.19,315.29s-.09.02-.13.03l.56-.07c-.25.03-.51.03-.76.1-.27.08-.42.18-.64.29l.47-.2c-.09.04-.18.06-.28.08l.47-.06c-.39.05-.61.07-.96.26-.49.26-.86.88-.83,1.44.03.62.32,1.17.77,1.59.32.3.64.51,1.06.62.51.13.88.06,1.39-.02s1.02-.56,1.26-.97c.26-.45.38-1.12.21-1.62-.36-1.11-1.44-1.75-2.59-1.47h0Z"/><path class="cls-44" d="m346.23,308.6c-.5,0-1-.03-1.48.11-.99.28-1.49,1.46-.96,2.35.25.43.62.74.97,1.08,1.06,1.01,2.79.68,3.36-.67s-.42-2.88-1.9-2.87h0Z"/><path class="cls-44" d="m405.23,320.58c-.66-.11-1.32-.25-1.99-.29-.55-.04-1.29.28-1.66.69s-.57.82-.64,1.35c-.15,1.1.54,2.31,1.68,2.57.45.1.91.14,1.37.2.31.1.62.11.93.04.31-.01.6-.11.87-.28.49-.28.95-.84,1.08-1.4.14-.6.11-1.27-.24-1.8-.31-.48-.81-.98-1.4-1.08h0Z"/><path class="cls-44" d="m405.83,313.96c-.76.55-1.48,1.12-2.17,1.75-.75.67-.74,1.9-.16,2.66s1.76,1.07,2.61.52c.79-.51,1.52-1.06,2.25-1.64.37-.3.63-1.01.61-1.48s-.16-.89-.45-1.27c-.58-.76-1.85-1.15-2.69-.54h0Z"/><path class="cls-44" d="m386.3,300.87c-.35.19-.67.41-.92.72l-.2.25c-.08.1-.15.19-.23.29-.17.22-.27.46-.37.72-.21.55,0,1.22.34,1.66.13.21.31.37.54.49.3.17.62.26.96.26.32.04.73-.09,1.06-.15.38-.07.72-.24,1.04-.45.48-.31.86-.75,1.01-1.32.15-.53.08-1.23-.22-1.7s-.75-.88-1.32-1.01-1.16-.07-1.7.22h0Z"/><path class="cls-44" d="m359.25,318.85c-.08.07-.16.15-.24.22l.34-.26-.28.19c-.43.3-.72.71-.72,1.25s.29.95.72,1.25l.28.19-.34-.26c.08.07.16.14.24.22.25.23.55.4.87.51.42.14.89.07,1.29-.1.33-.14.58-.33.79-.61.26-.33.44-.77.42-1.2-.03-.69-.37-1.35-.98-1.71-.78-.46-1.75-.29-2.4.31h0Z"/><path class="cls-44" d="m412.84,321.3l.89.61-.44-.34c.13.11.26.23.38.34.75.69,1.92.91,2.82.36.69-.42,1.25-1.15,1.15-2.01-.06-.53-.16-.97-.5-1.41-.29-.37-.73-.75-1.21-.83-.53-.09-1.02-.27-1.53-.44-.96-.32-2.03.3-2.4,1.18-.41.97-.02,1.96.83,2.54h0Z"/><path class="cls-44" d="m425.19,331.26l1.74.46c1.04.27,2.28-.35,2.53-1.44.12-.53.09-1.12-.21-1.59-.27-.42-.72-.88-1.23-.95l-1.79-.25c-.54-.07-1.01-.09-1.5.2-.4.24-.79.7-.9,1.17-.23,1.02.31,2.12,1.36,2.4h0Z"/><path class="cls-37" d="m408.28,331.96c.06.17.13.34.18.51.09.31.24.57.46.8.23.22.49.38.8.46l.14.03c.22.07.44.08.67.03.22-.01.43-.08.62-.2.35-.22.7-.58.77-1l.02-.12.06-.48c0-.25-.04-.48-.16-.7-.04-.15-.12-.29-.23-.4-.13-.2-.3-.35-.51-.46-.02-.02-.05-.03-.07-.05l.36.28-.35-.31-.34-.26c-.19-.12-.4-.19-.62-.2-.15-.04-.29-.04-.44,0-.22.01-.43.08-.62.2-.24.15-.44.35-.59.59-.12.19-.19.4-.2.62-.05.22-.04.44.03.66h0Z"/><path class="cls-37" d="m424.62,340.87c2.4,0,2.41-3.73,0-3.73s-2.41,3.73,0,3.73h0Z"/><path class="cls-44" d="m320.88,330.61c-.65-.1-1.16-.21-1.84-.09-.22.04-.44.08-.65.13-.5.11-.99.26-1.48.43-1.62.56-2.56,2.21-1.86,3.87s2.52,2.13,4.07,1.37c.18-.09.4-.22.6-.28-.66.2.04,0,.15-.04.21-.07.42-.13.63-.2l.65-.28c.62-.49.74-.57.34-.25.88-.54,1.35-1.52,1.21-2.53-.12-.9-.84-1.96-1.82-2.11h0Z"/><path class="cls-44" d="m320.15,320.35c-1.24-.47-2.5-.4-3.78-.18-.67.12-1.38.75-1.71,1.32-.36.61-.51,1.52-.29,2.2.47,1.45,1.98,2.45,3.52,2,.74-.22,1.5-.37,2.26-.53,1.02-.21,1.88-1.37,1.83-2.4-.05-1.18-.76-1.99-1.83-2.4h0Z"/><path class="cls-44" d="m395.45,309.73c-1.21-1.04-2.71-1.45-4.24-1.81-1.21-.28-2.66.17-3.27,1.33-.39.75-.46,1.42-.29,2.23.27,1.28,1.57,2.07,2.79,2.13,1.58.08,3.12.07,4.58-.6,1.18-.54,1.38-2.46.42-3.28h0Z"/><path class="cls-44" d="m395.7,319.42c-1.46-.34-2.63.28-3.92.87l1.55-.42c-.81-.05-1.52.32-2.23.64s-1.29,1.22-1.48,1.92c-.21.77-.12,1.8.32,2.48s1.1,1.29,1.92,1.48,1.8.18,2.48-.32c.62-.46,1.29-.87,1.63-1.59l-1.1,1.1c1.09-.81,2.26-1.55,2.65-2.93s-.45-2.9-1.83-3.22h0Z"/></g><g><path class="cls-34" d="m193.35,179.07l1.64-4.13,2.17-3.29s-.53-1.15-1.38-.19l-1.7,2.19,2-4.43s-.11-.92-.96-.43l-2.36,4.12,1.59-5.77s-.61-.94-1.48-.2l-1.83,5.6,1.02-5.32s.12-.88-.53-.84-.9.91-.9.91l-2.12,7.09-2.14-3.14s-.32-.65-1.53,0c0,0,1.71,3.29,1.69,4.11s-1.22,4.58.76,5.88c1.98,1.3,6.07-2.15,6.07-2.15Z"/><g><g><path class="cls-43" d="m156.26,301.66c-.07,1.29.02,2.24-.1,3.62-.12,1.38-.81,3.89-.89,5.18s.3,1.89,1.57,1.94c5.06.22,10.61.21,15.7.3.94.02,1.22-.51,1.37-1.31.06-.31.04-.68.01-1.15-.03-.47-.13-.94-.68-1.35-2.34-1.76-4.88-3.67-7.28-5.45-.44-1.53-.88-3.05-1.32-4.58-2.79.94-5.6,1.88-8.39,2.79Z"/><path class="cls-46" d="m165.17,237.08c-1,20.95.89,42.07,1.19,63.03-3.5,2.09-8.07,1.67-11.92,1.39-.69-17.55-1.75-35.08-2.9-52.6-.29,0-.59,0-.88,0-.03-3.88-.05-7.77-.13-11.65,4.89.04,9.75.09,14.64-.17Z"/></g><g><path class="cls-43" d="m144.83,301.86c.03,1.29-.1,2.25-.03,3.64.07,1.39.68,3.94.71,5.23s-.36,1.88-1.62,1.9c-5.06.07-10.6-.11-15.69-.17-.94-.01-1.2-.55-1.33-1.35-.05-.31-.02-.68.02-1.15.04-.47.16-.94.72-1.34,2.39-1.69,4.98-3.53,7.44-5.24.5-1.52.98-3.03,1.48-4.55,2.77,1,5.54,2.03,8.3,3.03Z"/><path class="cls-46" d="m136.78,237.3c-.45,20.92-.99,41.83-2.03,62.74,3.46,2.18,8.01,1.9,11.89,1.71,1.27-17.6,2.28-35.21,3.13-52.84.29,0,.59,0,.88,0-.03-3.88-.05-7.77-.13-11.65-4.58-.04-9.17.02-13.76.05Z"/></g></g><path class="cls-43" d="m165.41,235.75c-.09,1.05.03-.23-.13,1.36s-.34,6.07-.32,8.22c-9.45-2.05-18.82-4.58-28.21-6.92-.01-.98-.01-1.95-.02-2.92,9.53.08,19.16,1.01,28.68.26Z"/><path class="cls-35" d="m165.57,232.12c-.07,1.19.7,3.73.56,4.91-10.13,3.09-20.23,2.35-30.27-.59,0-1.19,0-2.38-.01-3.57,10.18.19,19.56-.15,29.73-.75Z"/><path class="cls-34" d="m121.23,232.12c-.72.84-1.83,1.89-2.46,2.68s-.7.83-.95,1.85c-.25,1.02-.58,2.62-.79,3.81s.33,2.16,1.36,2.76c.04.02.12.06.17.08,1.16.38,2.12.23,2.98-.73.43-.47,1.01-1.23,1.4-1.74.71-.94.95-1.76,1.02-2.92.02-.39-.02-.97,0-1.38.18.92.36,1.86.53,2.79.33,0,.65-.02.98-.03.17-2.18.34-4.36.52-6.54-1.59-.21-3.15-.43-4.75-.64Z"/><path class="cls-37" d="m167.08,229.7c-.13,2.24-1.8,3.68-3.08,4.01-9.05,2.31-17.71,2.36-25.99.3-3.04-.76-2.92-1.65-2.83-3.9.29-7.48,1.99-15.51,2.62-23.11-3.2,9.27-6.43,18.9-9.68,28.06-.52,1.47-1.53,1.58-2.79,1.01-1.25-.57-3.09-1.89-4.33-2.61-.81-.46-1.1-1.34-.86-2.1,4.01-12.74,9.92-25.21,15.57-37.01,1.86-3.88,4.92-5.2,8.89-5.34,3.97-.14,8.18-.8,12.34-.05,4.16.76,7.38,1.83,11.37,1.83,12.32,0,13.85-1.93,17.25-12.36.49-1.49.16-2.49,1.35-2.12s4.33,1.75,5.64,2.11c2.78.77.64,1.88-.26,4.15,0,0-3.73,21.39-27.88,20.18,0,0,2.77,25.53,2.68,26.94Z"/><path class="cls-34" d="m150.48,191.85c.23.02.62,0,.85-.01,1.47-.13,2.42-1.1,2.5-2.52.08-1.42-.04-2.68,0-4.06-1.99.01-3.95,0-5.93.02.05,1.4-.06,2.67.04,4.09.1,1.43,1.07,2.37,2.54,2.48Z"/><path class="cls-43" d="m147.91,188.2c.99-.23,1.97-.46,2.96-.69.99-1.99,1.97-3.99,2.97-5.97-1.97,0-3.95,0-5.92-.02-.02,2.23-.02,4.45,0,6.68Z"/><path class="cls-34" d="m144.44,177.91c-.06,3.84,2.02,9.39,6.42,9.37,4.4-.02,6.49-5.46,6.54-9.26.04-3.8-2.23-7.68-6.37-7.75-4.14-.06-6.52,3.8-6.59,7.64Z"/><path class="cls-42" d="m157.5,178.98c1.56-.87,2.72-2.29,2.73-4.09.01-1.8-.24-3.36-2.07-3.72-1.61-3.49-2.81-6.4-7.6-6.42-4.8-.02-8.37,3.49-9.73,8.39.26,1.24.75,2.66,1.67,3.49.91.83.65,1.78,1.79,2.42.69-1.27-1.23-1.89.68-3.25,1.91-1.36,6.84,1.62,9.16-1.96.75,1.99,1.43,4.05,3.38,5.12Z"/></g></svg>
                 </div>
             </div>
             <div class="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
                 <div class="md:pt-12 sm:pt-6 lg:pt-20">
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
-                        {{ .Site.Params.P1.Heading }}
+                    <h2 class="text-3xl font-bold tracking-tight text-blue-superdark dark:text-gray-50 sm:text-4xl">
+                        What's so great about plazas?
                     </h2>
-                    <div class="mt-6 text-gray-900 dark:text-white">
-                        <div class="mt-6 space-y-6 text-gray-900 dark:text-white">
-                            {{ range .Site.Params.P1.Content }}
-                            <p class="text-lg text-gray-900 dark:text-white">
-                                {{ .text }}
+                    <div class="mt-6 text-blue-superdark dark:text-white">
+                        <div class="mt-6 space-y-6 dark:text-white">
+                            <p> Plazas present a unique opportunity to exist peacefully within your community. 
                             </p>
-                            {{ end }}
+                            <p>They are a place where you can linger for free. You can run into your neighbors. You can pass the time reading or people watching. 
+                            </p>
+                            <p>There may be shops and cafes surronding the plaza that you can stop into on your way through. There are often fountains, sculptures, other works of art, or beautiful building facades that make the space inviting, delightful, and unique.
+                            </p>
+                            <p>
+                                There is nowhere like a plaza and they are worth prioritizing.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -74,203 +106,272 @@
         </div>
     </div>
 
-    <!-- JITsection -->
-    <div class="overflow-hidden sm:pt-6 lg:relative">
-        <div class="max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-12 lg:px-8">
-            <div>
-                <div class="md:mt-8">
-                    <div class="mt-6 sm:max-w-xl">
-                        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl md:mt-16">
-                            {{ .Site.Params.P2.Heading }}
-                        </h2>
-                        {{ range .Site.Params.P2.Content }}
-                        <p class="pb-12 mt-6 text-lg text-gray-900 dark:text-white">
-                            {{ .text }}
-                        </p>
-                        {{ end }}
-                        </p>
+    <!-- Where are the plazas -->
+    <div class="relative py-8 bg-orange-lightest">
+        <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
+            
+            <div class="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
+                <div class="md:pt-12 sm:pt-6 lg:pt-20">
+                    <h2 class="text-3xl font-bold tracking-tight text-blue-superdark dark:text-gray-50 sm:text-4xl">
+                        But where are all the plazas?!
+                    </h2>
+                    <div class="mt-6 text-blue-superdark dark:text-white">
+                        <div class="mt-6 space-y-6 dark:text-white">
+                            <p> The USA is significantly lagging behind fellow developed nations in its prioritization of high quality public spaces. 
+                            </p>
+                            <p>We have favored private interest over public good, and we are paying the price. Most Americans are more isolated than ever before, lacking spaces and opportunities to connect with each other during day-to-day life, craving those simple moments of marvel and spontaneity that are only possible in a place like a plaza.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="sm:mx-auto sm:max-w-3xl sm:px-6">
-            <div class="md:py-12 sm:relative sm:mt-12 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+
+            <div class="relative sm:py-4 lg:py-0">
                 <div class="hidden sm:block">
-                    <div class="absolute inset-y-0 w-screen left-1/2 rounded-l-3xl bg-gray-50 dark:bg-gray-900/10 lg:left-80 lg:right-0 lg:w-full"></div><svg class="absolute -mr-3 top-8 right-1/2 lg:left-0 lg:m-0" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
+                    <div class="absolute inset-y-0 w-screen left-1/2 rounded-l-3xl bg-red-medium lg:left-80 lg:right-0 lg:w-full"></div><svg class="absolute -mr-3 top-8 right-1/2 lg:left-0 lg:m-0" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
                         <defs>
                             <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                                <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-gray-900/60" fill="currentcolor"></rect>
+                                <rect x="0" y="0" width="4" height="4" class="text-gray-200 dark:text-gray-900/60" fill="#34596C"></rect>
                             </pattern>
                         </defs>
                         <rect width="404" height="392" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
                     </svg>
                 </div>
-                <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:h-full lg:max-w-none lg:pl-12">
-                    {{ $p2image := resources.Get .Site.Params.P2.Image }}
-                    {{ with $p2image }}
-                    {{ with .Resize (printf "%dx%d webp q90" .Width .Height) }}
-                    <img imgh src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="p2" class="w-full rounded-lg shadow-xl lg:h-full lg:w-auto lg:max-w-none" loading="lazy" />
-                    {{ end }}
-                    {{ end }}
+                <div class="relative w-full h-auto px-4 py-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0 lg:py-2">
+                        <svg id="Layer_13" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 380"><defs><style>.cls-a1{fill:#fff;}.cls-a2{fill:#64aecc;}.cls-a3{opacity:.16;}.cls-a3,.cls-a4{fill:#023047;}.cls-a5{fill:#fed9b7;}.cls-a6{fill:#fb8500;}.cls-a7{fill:none;stroke:#ffb703;stroke-miterlimit:10;stroke-width:.81px;}.cls-a8{fill:#82a860;}.cls-a9{fill:#219ebc;}.cls-a10{opacity:.54;}.cls-a10,.cls-a11{fill:#fdfcdc;}.cls-a12{fill:#ffb703;}.cls-a13{fill:#35596c;}.cls-a14{fill:#8ecae6;}.cls-a15{fill:#92979b;}.cls-a16{fill:#a1aaaf;}.cls-a17{fill:#ffeedf;}.cls-a18{fill:#e9c46a;}.cls-a19{fill:#264653;}.cls-a20{fill:#f07167;}</style></defs><rect class="cls-a18" x="85.15" y="49.71" width="276.01" height="276.01" rx="43.7" ry="43.7" transform="translate(-12.62 16.12) rotate(-4.02)"/><ellipse class="cls-a8" cx="214.09" cy="340.69" rx="200.11" ry="34"/><path class="cls-a15" d="m214.09,374.69c48.26,0,92.53-2.9,127.09-7.74l-22.58-55.27c-30.42-3.17-66.21-5-104.51-5-32.37,0-62.95,1.31-90.01,3.63-.05.05-50.55,54.55-51.16,54.48,36.19,6.12,86.08,9.9,141.17,9.9Z"/><g><g><path class="cls-a10" d="m87.27,104.36c-.51,0-1.03-.01-1.54-.04-16.38-.78-29.71-14.23-30.34-30.62-.34-8.76,2.82-17.07,8.89-23.38,5.31-5.52,12.21-8.86,19.71-9.62,5.86-8.79,15.87-14.27,26.58-14.27s20.72,5.48,26.57,14.26c7.55.73,14.51,4.09,19.84,9.64,6.07,6.31,9.23,14.61,8.89,23.38-.63,16.39-13.97,29.84-30.35,30.62-.51.02-1.02.04-1.53.04h0c-8.94,0-17.4-3.82-23.36-10.2-5.96,6.38-14.42,10.2-23.36,10.2Z"/><path class="cls-a11" d="m133.99,51.56c-.27,0-.54,0-.81.02-1.6.06-3.07-.81-3.77-2.26-3.37-7.02-10.54-11.86-18.84-11.86s-15.47,4.85-18.84,11.86c-.69,1.44-2.16,2.31-3.76,2.26-.23,0-.47-.01-.7-.01-11.81,0-21.34,9.81-20.88,21.72.42,10.75,9.11,19.53,19.86,20.04,8.73.42,16.35-4.53,19.86-11.83.69-1.44,2.16-2.32,3.76-2.26.23,0,.47.01.7.01.27,0,.54,0,.81-.02,1.6-.06,3.08.82,3.77,2.26,3.51,7.3,11.12,12.24,19.85,11.83,10.75-.51,19.45-9.29,19.87-20.04.46-11.92-9.06-21.72-20.88-21.72Z"/><g><g><path class="cls-a4" d="m110.06,97.6h-2.13l.12,1.67h-5.11l-9.63-8.36h-5.24l-.09.66h4.22c.21,0,.41.09.56.24l8.91,9.55c.43.46,1.04.73,1.68.73h7.23l-.51-4.48Z"/><path class="cls-a13" d="m102.94,99.27h5.11l-.12-1.67h-4.15c-.32,0-.63-.11-.88-.31l-8.42-6.83c-.43-.35-.97-.54-1.53-.54h-4.74l-.14.99h5.24l9.63,8.36Z"/></g><g><path class="cls-a4" d="m111.07,97.6h2.13l-.12,1.67h5.11l9.63-8.36h5.24l.09.66h-4.22c-.21,0-.41.09-.56.24l-8.91,9.55c-.43.46-1.04.73-1.68.73h-7.23l.51-4.48Z"/><path class="cls-a13" d="m118.2,99.27h-5.11l.12-1.67h4.15c.32,0,.63-.11.88-.31l8.42-6.83c.43-.35.97-.54,1.53-.54h4.74l.14.99h-5.24l-9.63,8.36Z"/></g><path class="cls-a4" d="m118.31,259.74v-18.85l-4.01-25.29,2.03-3.84c.62-1.18.62-2.6-.01-3.78l-2.3-4.28c-.07-.13-.1-.27-.1-.41v-1.96c0-.22.08-.43.23-.59l2.17-2.34c.41-.44.54-1.07.35-1.64l-2.49-7.35c-.05-.14-.07-.28-.07-.42v-3.67h-7v3.67c0,.14-.02.29-.07.42l-2.49,7.35c-.19.57-.06,1.2.35,1.64l2.17,2.34c.15.16.23.37.23.59v1.96c0,.14-.04.28-.1.41l-2.3,4.28c-.63,1.18-.64,2.6-.01,3.78l2.03,3.84-4.01,25.29v18.85h15.4Z"/><g><polygon class="cls-a6" points="112.83 51.56 108.8 51.56 103.88 57.62 117.74 57.62 112.83 51.56"/><polygon class="cls-a12" points="115.84 57.06 110.81 57.06 110.81 51.56 112.45 51.56 115.84 57.06"/><path class="cls-a12" d="m106.4,74.04h8.74c.87,0,1.58.71,1.58,1.58v.29h-11.9v-.29c0-.87.71-1.58,1.58-1.58Z"/><rect class="cls-a4" x="102.56" y="57.06" width="16.02" height="1.68" rx=".71" ry=".71"/><polygon class="cls-a6" points="115.5 74.04 106.07 74.04 104.53 61.53 117.04 61.53 115.5 74.04"/><polygon class="cls-a4" points="113.16 49.49 108.44 49.49 108.8 51.56 112.8 51.56 113.16 49.49"/><polygon class="cls-a6" points="112.67 47.78 112.67 48.37 112.12 48.37 112.12 47.78 111.07 47.78 111.07 48.37 110.53 48.37 110.53 47.78 109.47 47.78 109.47 48.37 108.93 48.37 108.93 47.78 107.87 47.78 107.87 48.37 107.87 48.71 107.87 49.49 113.72 49.49 113.72 48.71 113.72 48.37 113.72 47.78 112.67 47.78"/><ellipse class="cls-a11" cx="110.66" cy="64.98" rx="3.82" ry="4.92"/><g><line class="cls-a7" x1="107.49" y1="60.93" x2="108.53" y2="74.61"/><line class="cls-a7" x1="113.84" y1="60.93" x2="112.81" y2="74.61"/></g><rect class="cls-a12" x="104.42" y="59.66" width="12.71" height="1.87"/><path class="cls-a6" d="m103.3,58.74h14.77v.2c0,.61-.5,1.11-1.11,1.11h-12.55c-.61,0-1.11-.5-1.11-1.11v-.2h0Z"/></g><g><path class="cls-a4" d="m86.48,90.15l-2.47-.68c-.36-.1-.76,0-1.02.28l-.86.88c-.4.42-.39,1.08.03,1.48h0c.28.26.68.35,1.04.23l2.42-.82.85-1.14v-.21Z"/><g><g><polygon class="cls-a6" points="89.41 58.35 85.38 58.35 80.46 64.41 94.33 64.41 89.41 58.35"/><polygon class="cls-a12" points="92.42 63.85 87.39 63.85 87.39 58.35 89.03 58.35 92.42 63.85"/><path class="cls-a12" d="m82.98,80.83h8.74c.87,0,1.58.71,1.58,1.58v.29h-11.9v-.29c0-.87.71-1.58,1.58-1.58Z"/><rect class="cls-a4" x="79.14" y="63.85" width="16.02" height="1.68" rx=".71" ry=".71"/><polygon class="cls-a6" points="92.08 80.83 82.65 80.83 81.11 68.32 93.62 68.32 92.08 80.83"/><polygon class="cls-a4" points="89.74 56.27 85.02 56.27 85.38 58.35 89.39 58.35 89.74 56.27"/><polygon class="cls-a6" points="89.25 54.57 89.25 55.16 88.71 55.16 88.71 54.57 87.66 54.57 87.66 55.16 87.11 55.16 87.11 54.57 86.06 54.57 86.06 55.16 85.51 55.16 85.51 54.57 84.46 54.57 84.46 55.16 84.46 55.5 84.46 56.27 90.31 56.27 90.31 55.5 90.31 55.16 90.31 54.57 89.25 54.57"/><ellipse class="cls-a11" cx="87.24" cy="71.77" rx="3.82" ry="4.92"/><g><line class="cls-a7" x1="84.07" y1="67.72" x2="85.11" y2="81.4"/><line class="cls-a7" x1="90.42" y1="67.72" x2="89.39" y2="81.4"/></g><rect class="cls-a12" x="81" y="66.45" width="12.71" height="1.87"/><path class="cls-a6" d="m79.88,65.53h14.77v.2c0,.61-.5,1.11-1.11,1.11h-12.55c-.61,0-1.11-.5-1.11-1.11v-.2h0Z"/></g><path class="cls-a4" d="m89.96,90.34c0,1.42-1.15,2.18-2.56,2.18s-2.56-.77-2.56-2.18,1.15-2.56,2.56-2.56,2.56,1.15,2.56,2.56Z"/><path class="cls-a4" d="m86.54,86.21h1.7c1.07,0,1.94.87,1.94,1.94v.35h-5.57v-.35c0-1.07.87-1.94,1.94-1.94Z"/><polygon class="cls-a4" points="90.1 86.21 84.68 86.21 83.24 82.7 91.55 82.7 90.1 86.21"/><rect class="cls-a4" x="85.99" y="92.61" width="2.8" height="2.8" rx="1.18" ry="1.18" transform="translate(92.08 -34.26) rotate(45)"/><path class="cls-a4" d="m86.1,92.13h2.59v.12c0,.36-.29.66-.66.66h-1.28c-.36,0-.66-.29-.66-.66v-.12h0Z"/></g></g><g><path class="cls-a4" d="m134.66,90.15l2.47-.68c.36-.1.76,0,1.02.28l.86.88c.4.42.39,1.08-.03,1.48h0c-.28.26-.68.35-1.04.23l-2.42-.82-.85-1.14v-.21Z"/><g><g><polygon class="cls-a6" points="131.73 58.35 135.76 58.35 140.67 64.41 126.81 64.41 131.73 58.35"/><polygon class="cls-a12" points="128.72 63.85 133.74 63.85 133.74 58.35 132.11 58.35 128.72 63.85"/><path class="cls-a12" d="m127.83,80.83h11.9v.29c0,.87-.71,1.58-1.58,1.58h-8.74c-.87,0-1.58-.71-1.58-1.58v-.29h0Z" transform="translate(267.56 163.52) rotate(180)"/><rect class="cls-a4" x="125.98" y="63.85" width="16.02" height="1.68" rx=".71" ry=".71" transform="translate(267.97 129.39) rotate(180)"/><polygon class="cls-a6" points="129.05 80.83 138.48 80.83 140.02 68.32 127.51 68.32 129.05 80.83"/><polygon class="cls-a4" points="131.39 56.27 136.11 56.27 135.76 58.35 131.75 58.35 131.39 56.27"/><polygon class="cls-a6" points="131.88 54.57 131.88 55.16 132.43 55.16 132.43 54.57 133.48 54.57 133.48 55.16 134.03 55.16 134.03 54.57 135.08 54.57 135.08 55.16 135.63 55.16 135.63 54.57 136.68 54.57 136.68 55.16 136.68 55.5 136.68 56.27 130.83 56.27 130.83 55.5 130.83 55.16 130.83 54.57 131.88 54.57"/><ellipse class="cls-a11" cx="133.9" cy="71.77" rx="3.82" ry="4.92"/><g><line class="cls-a7" x1="137.06" y1="67.72" x2="136.03" y2="81.4"/><line class="cls-a7" x1="130.71" y1="67.72" x2="131.75" y2="81.4"/></g><rect class="cls-a12" x="127.43" y="66.45" width="12.71" height="1.87" transform="translate(267.56 134.77) rotate(180)"/><path class="cls-a6" d="m127.59,65.53h12.55c.61,0,1.11.5,1.11,1.11v.2h-14.77v-.2c0-.61.5-1.11,1.11-1.11Z" transform="translate(267.73 132.38) rotate(180)"/></g><path class="cls-a4" d="m131.18,90.34c0,1.42,1.15,2.18,2.56,2.18s2.56-.77,2.56-2.18-1.15-2.56-2.56-2.56-2.56,1.15-2.56,2.56Z"/><path class="cls-a4" d="m130.96,86.21h5.57v.35c0,1.07-.87,1.94-1.94,1.94h-1.7c-1.07,0-1.94-.87-1.94-1.94v-.35h0Z" transform="translate(267.49 174.71) rotate(180)"/><polygon class="cls-a4" points="131.03 86.21 136.45 86.21 137.9 82.7 129.59 82.7 131.03 86.21"/><rect class="cls-a4" x="132.34" y="92.61" width="2.8" height="2.8" rx="1.18" ry="1.18" transform="translate(294.79 65.91) rotate(135)"/><path class="cls-a4" d="m133.1,92.13h1.28c.36,0,.66.29.66.66v.12h-2.59v-.12c0-.36.29-.66.66-.66Z" transform="translate(267.49 185.04) rotate(-180)"/></g></g><circle class="cls-a4" cx="110.57" cy="99.75" r="4.94"/><circle class="cls-a4" cx="110.57" cy="107.51" r="3.57"/><path class="cls-a4" d="m112.16,79.42h1.12l1.44-3.52h-8.31l1.44,3.52h1.12c-.66,0-1.2.54-1.2,1.2v1.09h1.01c-.48.47-.78,1.12-.78,1.84,0,.94.51,1.6,1.27,1.93v.12c0,.26.19.46.44.5l-.53.53c-.33.33-.33.86,0,1.19l.79.79s0,0,0,0c-.73.3-1.25,1.14-1.25,2.13,0,.56.16,1.06.44,1.45.21.3,0,.71-.37.71h0c-.54,0-.97.43-.97.97v.56c0,.54.43.97.97.97h3.52c.54,0,.97-.43.97-.97v-.56c0-.54-.43-.97-.97-.97h0c-.37,0-.58-.41-.37-.71.27-.39.44-.9.44-1.45,0-.99-.52-1.83-1.25-2.13,0,0,0,0,0,0l.79-.79c.33-.33.33-.86,0-1.19l-.53-.53c.25-.04.44-.25.44-.5v-.12c.76-.33,1.27-.99,1.27-1.93,0-.72-.3-1.38-.78-1.84h1.01v-1.09c0-.66-.54-1.2-1.2-1.2Z"/><polygon class="cls-a4" points="113.36 113.83 108.05 113.83 108.89 110.63 112.51 110.63 113.36 113.83"/><rect class="cls-a4" x="107" y="113.83" width="7.33" height="1.76" rx=".74" ry=".74"/><rect class="cls-a4" x="107" y="116.2" width="7.33" height="1.76" rx=".74" ry=".74"/><rect class="cls-a13" x="107" y="115" width="7.33" height="1.76" rx=".74" ry=".74"/><polygon class="cls-a4" points="114.05 184.59 107.16 184.59 107.95 117.18 113.26 117.18 114.05 184.59"/><polygon class="cls-a13" points="114.05 184.59 110.73 184.59 110.7 117.97 113.26 117.97 114.05 184.59"/><rect class="cls-a4" x="106.19" y="182.72" width="8.98" height="1.05" rx=".44" ry=".44"/><rect class="cls-a4" x="106.19" y="184.26" width="8.98" height="1.05" rx=".44" ry=".44"/></g></g><g><rect class="cls-a11" x="95.06" y="242.34" width="31.01" height="2.92" rx="1.23" ry="1.23"/><path class="cls-a5" d="m142.53,289.49v-2.3l-3.52-1.79c-4.33-2.2-7.06-6.64-7.06-11.49v-14.78h1.38c.25,0,.46-.21.46-.46v-3.76c0-.25-.21-.46-.46-.46h-3.91v-1.65c0-.44-.36-.81-.81-.81h-2.8v-2.37c0-.62-.32-1.2-.85-1.53l-4.59-2.84h-18.51l-4.59,2.84c-.53.33-.85.91-.85,1.53v2.37h-2.8c-.44,0-.81.36-.81.81v1.65h-3.91c-.25,0-.46.21-.46.46v3.76c0,.25.21.46.46.46h1.38v14.78c0,4.85-2.73,9.3-7.06,11.49l-3.52,1.79v2.3h62.82Z"/><path class="cls-a11" d="m126.44,285.41c-4.33-2.2-7.06-6.64-7.06-11.49v-14.78h1.38c.25,0,.46-.21.46-.46v-3.76c0-.25-.21-.46-.46-.46h-3.91v-1.65c0-.44-.36-.81-.81-.81h-2.8v-2.37c0-.62-.32-1.2-.85-1.53l-4.59-2.84h-5.94l-4.59,2.84c-.53.33-.85.91-.85,1.53v2.37h-2.8c-.44,0-.81.36-.81.81v1.65h-3.91c-.25,0-.46.21-.46.46v3.76c0,.25.21.46.46.46h1.38v14.78c0,4.85-2.73,9.3-7.06,11.49l-3.52,1.79v2.3h50.26v-2.3l-3.52-1.79Z"/><rect class="cls-a11" x="60.19" y="289.49" width="100.76" height="6.54"/><path class="cls-a5" d="m157.46,296.04v5.32l-2.52,3.01c-1.82,2.18-4.29,3.73-7.04,4.44l-5.37,1.38v1.56l2.62.31c1.02.12,1.79.99,1.79,2.01v5.08h-73.9v-5.08c0-1.03.77-1.89,1.79-2.01l2.62-.31v-1.56l-5.37-1.38c-2.75-.71-5.22-2.26-7.04-4.44l-2.52-3.01v-5.32h94.94Z"/><rect class="cls-a20" x="77.46" y="310.19" width="65.07" height="1.56"/><rect class="cls-a20" x="62.52" y="296.04" width="94.72" height="4.15"/><polygon class="cls-a20" points="101.86 245.26 97.7 247.84 122.02 246.28 120.37 245.26 101.86 245.26"/></g></g><path class="cls-a3" d="m276.45,334.54c-10.42,0-20.02.55-27.68,1.48-2.64.32-5.3,0-7.79-.93-12.92-4.76-39.47-8.02-70.14-8.02-43.35,0-78.5,6.53-78.5,14.58s35.14,14.58,78.5,14.58c30.66,0,57.22-3.27,70.14-8.02,2.49-.92,5.15-1.25,7.79-.93,7.65.93,17.25,1.48,27.68,1.48,25.02,0,45.3-3.18,45.3-7.1s-20.28-7.1-45.3-7.1Z"/><ellipse class="cls-a17" cx="143.48" cy="323.11" rx="4.57" ry="1.64"/><path class="cls-a1" d="m138.29,164.11c-9.53,0-19.82,1.3-23.13,6.48-1.05,1.65-1.14,3.49-.25,5.33,1.93,3.98,7.67,6.8,13.95,6.86,44.84.4,169.4.99,170.66.99,11.99,0,18.77-4.87,19.07-9.45.23-3.63-3.59-8.1-14.99-9.77-9.72-1.43-26.79,7.81-26.96,7.9-.17.09-.37.05-.49-.1-.13-.15-.14-.37-.04-.54.1-.17,9.83-16.67,4.33-27.6-3.22-6.39-10.99-9.7-23.1-9.82-.17,0-.33,0-.5,0-26.71,0-48.1,22.1-48.31,22.33-.13.14-.34.17-.5.07-.16-.1-.24-.3-.19-.5.03-.11,2.73-11.56-2.98-19.51-3.7-5.15-10.09-7.76-18.99-7.76-28.45,0-30.8,35.38-30.82,35.74,0,.12-.06.24-.15.31-.09.08-.2.12-.31.1-3.23-.4-9.57-1.04-16.29-1.04Z"/><g><path class="cls-a1" d="m283.25,337.09v4.13l-.99,6.2c-.18,1.13.69,2.16,1.84,2.16h18.28c.85,0,1.53-.69,1.53-1.53v-1.31c0-.62-.3-1.2-.8-1.57l-8.57-6.18-1.63-5.29-9.66,3.39Z"/><path class="cls-a1" d="m262.11,327.41l2.63,3.18,4.71,4.14c.86.76.84,2.1-.04,2.83l-14.09,11.65c-.65.54-1.62.45-2.15-.2l-.83-1.01c-.4-.48-.54-1.12-.38-1.72l2.67-10.22-2.12-5.11,9.61-3.55Z"/><path class="cls-a9" d="m296.55,285.61l.96,55.09-15.73.86-4.53-36.73c-.11-1.16-.86-2.16-1.95-2.59l-.97-.38c-1.14-.45-2.43-.19-3.3.66l-10.97,10.69,5.13,16.8s-13.16,5.03-13.27,4.71c-.07-.22-4.89-13.61-8.04-22.35-1.64-4.55-.63-9.63,2.61-13.22l16.77-17.38,33.27,3.85Z"/><path class="cls-a4" d="m315.26,243.91s10.06,5.4,9.94,16.12l-15.42-1.55,5.47-14.57Z"/><path class="cls-a4" d="m248.73,241.62s2.34-10.42,14.36-14.52v8.72l-7.56,5.79h-6.8Z"/><path class="cls-a5" d="m263.09,230.53l-7.8-8.43-9.68-11.72,3.24-9.74c.13-2.1-1-4.07-2.87-5.02l-2.56-1.31c-2.97-1.52-6.59.07-7.48,3.28l-1.33,4.77c-.31,1.1-.25,2.27.17,3.34l3.68,9.44,7.48,13.2,11.71,13.22,5.46-11.04Z"/><path class="cls-a5" d="m310.71,248.49l9.83-5.95,12.54-8.59-.42-10.26c.46-2.05,2.09-3.63,4.15-4.03l2.83-.55c3.28-.64,6.31,1.89,6.29,5.22l-.04,4.95c0,1.14-.39,2.25-1.08,3.16l-6.14,8.06-10.84,10.62-14.9,9.48-2.2-12.12Z"/><path class="cls-a12" d="m285.07,244.35l-12.58-2.49-13.82,38.94s14.6,14.44,43.35,6.1l-2.78-37.28-14.16-5.27Z"/><g><g><path class="cls-a4" d="m156.72,325.32v7.61l1.82,11.42c.33,2.08-1.28,3.97-3.39,3.97h-33.69c-1.56,0-2.82-1.26-2.82-2.82v-2.41c0-1.14.55-2.22,1.48-2.89l15.79-11.39,3-9.75,17.8,6.25Z"/><path class="cls-a19" d="m139.52,187.47l-4.34,134.23s7.36,5.22,25.4,3.32l6.43-112.76h1.88v-24.79h-29.37Z"/></g><g><path class="cls-a4" d="m181.07,325.32v7.61l-1.82,11.42c-.33,2.08,1.28,3.97,3.39,3.97h33.69c1.56,0,2.82-1.26,2.82-2.82v-2.41c0-1.14-.55-2.22-1.48-2.89l-15.79-11.39-3-9.75-17.8,6.25Z"/><path class="cls-a19" d="m198.26,187.47l4.34,134.23s-7.36,5.22-25.4,3.32l-6.43-112.76h-1.88v-24.79h29.37Z"/></g></g><polygon class="cls-a4" points="139.3 184.74 139.3 186.93 138.95 205.12 198.34 189.84 198.34 183.65 139.3 184.74"/><path class="cls-a2" d="m137.56,179.77v7.69s32.95,9.94,62.67-1.83v-7.55l-62.67,1.69Z"/><path class="cls-a5" d="m98.92,176.13l-5.44,5.72c-.98,1.03-1.65,2.3-1.96,3.69l-1.8,8.24c-.53,2.41.68,4.86,2.9,5.93l.36.17c2.2,1.05,4.84.46,6.39-1.42l3.07-3.73c1.42-1.73,2.2-3.89,2.2-6.13v-2.99l1.09,5.96,2.09-.04,1.22-13.91-10.13-1.5Z"/><path class="cls-a5" d="m231.58,176.13l5.44,5.72c.98,1.03,1.65,2.3,1.96,3.69l1.8,8.24c.53,2.41-.68,4.86-2.9,5.93l-.36.17c-2.2,1.05-4.84.46-6.39-1.42l-3.07-3.73c-1.42-1.73-2.2-3.89-2.2-6.13v-2.99l-1.09,5.96-2.09-.04-1.22-13.91,10.13-1.5Z"/><path class="cls-a14" d="m154.78,83.65h26.43c7.36,0,16.09,4.36,19.01,11.11,8.9,20.54,25.55,50.76,33.74,79.73.49,1.73-.24,3.57-1.77,4.52l-9.38,5.83c-2.18,1.36-5.06.36-5.94-2.06l-21.05-60.31,6.19,49.93c.37,3.76-2.03,7.24-5.69,8.17-9.97,2.56-30.96,6.06-57.18-.21-3.72-.89-6.17-4.46-5.76-8.26l6.48-48.34-24.29,55.62c-1.46,3.23-5.41,4.46-8.44,2.63l-8.29-5c-2.59-1.56-3.58-4.82-2.31-7.55l40.18-75.27c3.03-6.52,10.88-10.55,18.07-10.55Z"/><path class="cls-a5" d="m161.33,76.12h12.66v11.21c0,1.56-1.27,2.83-2.83,2.83h-7.01c-1.56,0-2.83-1.27-2.83-2.83v-11.21h0Z"/><polygon class="cls-a4" points="173.99 82.27 167.66 80.85 161.33 68.23 173.99 68.23 173.99 82.27"/><path class="cls-a5" d="m181.71,60.78c0,9.18-6.29,20.07-14.05,20.07s-14.05-10.9-14.05-20.07,6.29-16.61,14.05-16.61,14.05,7.44,14.05,16.61Z"/><path class="cls-a4" d="m153.61,62.84s-6.32-3.27-5.83-8.82c.49-5.55,1.14-7.78,4.68-7.84,0,0,3.65-14.2,15.89-13.88,12.25.33,17.8,7.29,21.12,18.61,0,0-1.85,6.37-3.76,7.29s-.48,3.97-4,4.95c0,0,.79-3.87-.46-6.62-1.26-2.74-15.79,4.66-20.41-4.54,0,0-2.87,9.52-7.23,10.83Z"/><path class="cls-a5" d="m282.51,241.87h9.1v8.07c0,1.12-.91,2.03-2.03,2.03h-5.04c-1.12,0-2.03-.91-2.03-2.03v-8.07h0Z" transform="translate(99.3 -81.9) rotate(19.57)"/><polygon class="cls-a4" points="291.56 247.86 287.61 245.37 286.36 235.29 294.94 238.34 291.56 247.86"/><path class="cls-a5" d="m307.71,231.55c-3.09,8.69-12.71,16.88-20.06,14.27-7.35-2.61-9.63-15.04-6.55-23.73,3.09-8.69,11.55-13.61,18.89-11,7.35,2.61,10.8,11.77,7.71,20.46Z"/><path class="cls-a4" d="m282.24,219.5s6.6-4.2,10.81.9c7.75,9.38,11.44,3.17,14.99,12.48v-2.4s-1.66,5.37-4.55,8.37c0,0,12.85-5.59,9.66-15.58,0,0-.63-8.26-9.16-12.87-8.71-4.72-21.2-7.64-21.74,9.11Z"/><path class="cls-a12" d="m273.26,241.9l-10.17-14.8s-4.21,12.8-14.36,14.52l17.48,17.33,7.05-17.04Z"/><path class="cls-a12" d="m299.23,249.77l16.04-5.86s-.2,14.41,9.94,16.12l-25.29,9.05-.69-19.32Z"/></g><ellipse class="cls-a16" cx="318.32" cy="352.11" rx="4.57" ry="1.64"/><ellipse class="cls-a16" cx="289.5" cy="353.76" rx="4.57" ry="1.64"/><ellipse class="cls-a16" cx="305.4" cy="357.86" rx="11.41" ry="4.1"/><ellipse class="cls-a16" cx="225.5" cy="319.08" rx="11.41" ry="4.1"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Third section -->
+    <div class="relative py-8 bg-blue-lightest">
+        <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
+            <div class="relative sm:py-8 lg:py-0">
+                <div aria-hidden="true" class="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen">
+                    <div class="absolute inset-y-0 w-full bg-blue-darkest dark:bg-gray-900/10 right-1/2 rounded-r-3xl lg:right-72"></div><svg class="absolute -ml-3 top-8 left-1/2 lg:-right-8 lg:left-auto lg:top-12" width="404" height="392" fill="none" viewBox="0 0 404 392" loading="lazy">
+                        <defs>
+                            <pattern id="02f20b47-fd69-4224-a62a-4c9de5c763f7" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="#82A860"></rect>
+                            </pattern>
+                        </defs>
+                        <rect width="404" height="392" fill="url(#02f20b47-fd69-4224-a62a-4c9de5c763f7)"></rect>
+                    </svg>
+                </div>
+                <div class="relative w-full h-auto px-4 py-6 mx-auto sm:max-w-3xl sm:px-6 lg:px-0 lg:py-0">
+                        <svg id="Layer_13" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 380"><defs><style>.cls-b1{stroke-width:10px;}.cls-b1,.cls-b2{fill:none;stroke:#264653;stroke-miterlimit:10;}.cls-b3{fill:#fff;}.cls-b4{fill:#fed9b7;}.cls-b5{fill:#f7c49a;}.cls-b2{stroke-width:6px;}.cls-b6{fill:#82a860;}.cls-b7{fill:#05384c;}.cls-b8{fill:#f4a261;}.cls-b9{fill:#8ecae6;}.cls-b10{fill:#e76f51;}.cls-b11{fill:#023047;}.cls-b12{fill:#ffeedf;}.cls-b13{fill:#728e55;}.cls-b14{fill:#c6e4f2;}.cls-b15{fill:#264653;}.cls-b16{fill:#d35a54;}</style></defs><rect class="cls-b14" x="80.71" y="49.71" width="276.01" height="276.01" rx="43.7" ry="43.7" transform="translate(26.4 -26.97) rotate(7.51)"/><path class="cls-b3" d="m73.8,118.84c-9.53,0-19.82,1.3-23.13,6.48-1.05,1.65-1.14,3.49-.25,5.33,1.93,3.98,7.67,6.8,13.95,6.86,44.84.4,169.4.99,170.66.99,11.99,0,18.77-4.87,19.07-9.45.23-3.63-3.59-8.1-14.99-9.77-9.72-1.43-26.79,7.81-26.96,7.9-.17.09-.37.05-.49-.1-.13-.15-.14-.37-.04-.54.1-.17,9.83-16.67,4.33-27.6-3.22-6.39-10.99-9.7-23.1-9.82-.17,0-.33,0-.5,0-26.71,0-48.1,22.1-48.31,22.33-.13.14-.34.17-.5.07-.16-.1-.24-.3-.19-.5.03-.11,2.73-11.56-2.98-19.51-3.7-5.15-10.09-7.76-18.99-7.76-28.45,0-30.8,35.38-30.82,35.74,0,.12-.06.24-.15.31-.09.08-.2.12-.31.1-3.23-.4-9.57-1.04-16.29-1.04Z"/><path class="cls-b3" d="m243.59,81.63c-6.6,0-13.73.9-16.02,4.49-.73,1.14-.79,2.42-.17,3.69,1.34,2.76,5.31,4.71,9.66,4.75,31.05.28,117.3.68,118.17.69,8.31,0,13-3.37,13.2-6.54.16-2.51-2.48-5.61-10.38-6.77-6.73-.99-18.55,5.4-18.67,5.47-.11.06-.26.04-.34-.07-.09-.1-.1-.26-.03-.37.07-.11,6.8-11.55,3-19.11-2.23-4.43-7.61-6.72-16-6.8-.11,0-.23,0-.34,0-18.5,0-33.31,15.3-33.45,15.46-.09.1-.23.11-.34.05-.11-.07-.17-.21-.13-.34.02-.08,1.89-8-2.06-13.51-2.56-3.57-6.99-5.37-13.15-5.37-19.7,0-21.33,24.5-21.34,24.75,0,.08-.04.16-.1.22-.06.05-.14.08-.22.07-2.24-.27-6.63-.72-11.28-.72Z"/><ellipse class="cls-b4" cx="209.65" cy="340.69" rx="200.11" ry="34"/><ellipse class="cls-b5" cx="212.62" cy="340.81" rx="156.99" ry="14.58"/><g><g><path class="cls-b15" d="m364.68,245.49c2.94-11.62,4.5-24.16,5.2-30.99.29-2.81-1.81-5.28-4.62-5.49h0c-2.7-.19-5.06,1.79-5.34,4.48-.67,6.54-2.18,18.64-4.94,29.54l9.69,2.46Z"/><path class="cls-b15" d="m103.85,288.43h10v-17.89c11.87-9.88,16.2-42.01,17.56-56.07.27-2.8-1.82-5.26-4.62-5.46h0c-2.71-.2-5.07,1.81-5.33,4.52-2.16,22.41-8.08,46.63-14.77,49.85l-2.83,1.36v23.69Z"/><path class="cls-b1" d="m80.87,283.4c-11.81,3.9-20.33,15.03-20.33,28.14l.07,27.32"/><path class="cls-b1" d="m119.88,338.87l-.07-27.32c0-12.6-7.86-23.36-18.94-27.65"/><circle class="cls-b1" cx="90.21" cy="285.31" r="9.34"/><rect class="cls-b15" x="111.73" y="337.39" width="17.29" height="4.35" transform="translate(240.75 679.13) rotate(180)"/><rect class="cls-b15" x="51.84" y="337.39" width="17.29" height="4.35" transform="translate(120.97 679.13) rotate(180)"/><path class="cls-b1" d="m70.57,288.43v-20.55c-3.5-1.68-6.37-6.1-8.71-11.8-.92-2.26-1.38-4.22-1.38-6.66v.58"/><line class="cls-b2" x1="118.22" y1="252.4" x2="63.86" y2="252.4"/><line class="cls-b2" x1="118.22" y1="327.95" x2="63.86" y2="327.95"/><g><path class="cls-b1" d="m365.36,209.02s-3.75,52.01-18,58.86v20.55"/><path class="cls-b1" d="m319.37,283.4c-11.81,3.9-20.33,15.03-20.33,28.14l.07,27.32"/><path class="cls-b1" d="m358.38,338.87l-.07-27.32c0-12.6-7.86-23.36-18.94-27.65"/><circle class="cls-b1" cx="328.71" cy="285.31" r="9.34"/><rect class="cls-b15" x="350.23" y="337.39" width="17.29" height="4.35" transform="translate(717.75 679.13) rotate(180)"/><rect class="cls-b15" x="290.34" y="337.39" width="17.29" height="4.35" transform="translate(597.97 679.13) rotate(180)"/><path class="cls-b1" d="m309.07,288.43v-20.55c-3.5-1.68-6.37-6.1-8.71-11.8-.92-2.26-1.38-4.22-1.38-6.66v.58"/><line class="cls-b2" x1="356.73" y1="252.4" x2="302.36" y2="252.4"/></g><path class="cls-b8" d="m104.06,231.46h272.04c2.95,0,5.42-2.22,5.74-5.15l2.08-18.95c.38-3.42-2.3-6.41-5.74-6.41H107.42l-3.35,30.5Z"/><path class="cls-b10" d="m104,231.46h265.56c2.95,0,5.43-2.22,5.76-5.16l2.08-18.92c.38-3.43-2.31-6.42-5.76-6.42H106.08c-2.95,0-5.43,2.22-5.76,5.16l-2.08,18.92c-.38,3.43,2.31,6.42,5.76,6.42Z"/><path class="cls-b10" d="m31.28,263.43h334.79c1.95,0,3.53,1.58,3.53,3.53v1.84c0,1.95-1.58,3.53-3.53,3.53H31.28v-8.91h0Z" transform="translate(400.89 535.76) rotate(180)"/><line class="cls-b2" x1="355.89" y1="327.95" x2="301.53" y2="327.95"/></g><rect class="cls-b15" x="318.7" y="322.16" width="20.67" height="11.6" rx="5.8" ry="5.8" transform="translate(658.06 655.91) rotate(-180)"/><rect class="cls-b15" x="80.71" y="322.16" width="20.67" height="11.6" rx="5.8" ry="5.8" transform="translate(182.09 655.91) rotate(180)"/><rect class="cls-b10" x="297.71" y="263.43" width="36.88" height="8.91" rx="4.45" ry="4.45" transform="translate(632.3 535.76) rotate(180)"/><rect class="cls-b8" x="332.97" y="263.43" width="43.31" height="8.91" rx="4.45" ry="4.45" transform="translate(709.26 535.76) rotate(180)"/><rect class="cls-b8" x="283.31" y="263.43" width="40.61" height="8.91" rx="4.45" ry="4.45" transform="translate(607.24 535.76) rotate(180)"/></g><g><path class="cls-b16" d="m235.76,160.2s-74.52,57.07-41.68,69.57,43.79-27.08,43.79-27.08l-2.11-42.49Z"/><path class="cls-b9" d="m223.59,186.24s.96-13.65-15.83-20.66l1.69,11.49,14.14,9.17Z"/><path class="cls-b15" d="m218.39,330.46l2.14,16.4c.28,2.15-1.39,4.06-3.56,4.06h-32.51c-1.03,0-1.86-.83-1.86-1.86v-.81c0-1.43.81-2.73,2.1-3.36l16.34-8.03,2.02-6.39h15.34Z"/><path class="cls-b15" d="m247.81,331.2l1.42,6.88c.21,1.02.52,2.03.91,3.02l3.13,7.85c.57,1.42.16,2.93-.99,3.72l-1.72,1.17c-2.58,1.75-6.01,2.03-9.19.73l-6.17-2.52c-1.49-.61-2.48-2.11-2.39-3.63l.41-7.22c.07-1.19,0-2.41-.2-3.62l-1.18-7.13,15.96.75Z"/><path class="cls-b13" d="m237.32,227.25l19.01,1.73c2.69,9.08-10.92,38.1-20.38,37.76l-23.18-.84,8.03,65.65s-9.6,3.84-21.51,0l-21.94-66.48c-2.4-7.28-.09-15.28,5.82-20.16l1.56-1.29c2.5-2.06,5.48-3.42,8.63-3.98,2.68-.47,5.36-.92,7.97-1.69l35.99-10.69Z"/><path class="cls-b6" d="m275.93,233.59l4.54,15.37c2.69,9.08-4.32,18.12-13.78,17.78l-23.18-.84,8.03,65.65s-9.6,3.84-21.51,0l-21.94-66.48c-2.4-7.28-.09-15.28,5.82-20.16l1.56-1.29c3.33-2.75,7.52-4.25,11.84-4.25l48.63-5.76Z"/><path class="cls-b16" d="m254.28,150.56l-9.84,3.9c-5.34,2.37-9.58,7.41-11.44,12.95l-3.63,10.64c-1.45,5.53,2.6,9.68,3.67,11.89l.93,1.9c3.57,7.81.26,9.8-.16,11.2l-7.25,27.49s18.53-.18,29.11,10.19,30.53,4.99,30.53,4.99c0,0,9.11-63.35,1.4-86.2-5.59-16.55-33.31-8.96-33.31-8.96Z"/><path class="cls-b4" d="m254.32,143.68h7.65c1.72,0,3.12,1.4,3.12,3.12v12.29h-13.89v-12.29c0-1.72,1.4-3.12,3.12-3.12Z" transform="translate(544.75 237.49) rotate(166.33)"/><polygon class="cls-b11" points="251.17 152.1 257.55 148.95 261.03 133.85 247.53 137.13 251.17 152.1"/><path class="cls-b4" d="m237.36,131.19c2.38,9.78,11.91,19.77,20.19,17.76,8.28-2.01,12.16-15.26,9.78-25.05s-11.02-16.09-19.29-14.07-13.06,11.58-10.68,21.36Z"/><path class="cls-b8" d="m246.69,121.61s1.2,7.65,17.16,7.72c0,0-11.77,36.78,11.57,25.6,0,0,5.69-3.79,10.43,1.1,0,0,1.14-10.25-7.83-13.06-8.98-2.8,3.1-39.92-23.49-36.53,0,0-7.56-3.97-17.77,3-10.22,6.97-11.03,24.32,1.56,36.9,6.58,6.58-.67,10.09-.64,13.33,0,0,3.64-4.77,13.5-7.58l-1.01-4.17s-9.8-5.63-12.03-14.89c0,0,8.56-2.04,8.56-11.42Z"/><path class="cls-b3" d="m223.59,186.24s15.13-12.84,30.69-10.5l-1.89,1.17,1.89.16-.82.7h.82l1.23,5.63-16.07,9.04s-9.74,1.33-10.46,1.01-15.22-5.15-15.22-5.15l-13.03-11.7-3.08-4.48,3.86-2.93,2.03.86-1.09-1.64s13.74-1.66,21.15,17.83Z"/><path class="cls-b11" d="m229.19,188.25l27.12-5s-6.61,42.5-6.97,42.45-22.52.28-22.52.28c0,0-3.81-.54-8.77-1.63-1.33-.29-14.7-10.09-14.7-10.09l-6.55-42.72,22.38,15.49,10.01,1.23Z"/><path class="cls-b16" d="m219.18,187.03s4.24-2.07,10.01,1.23l-10.01-1.23Z"/><polygon class="cls-b9" points="200.56 169.92 220.15 185.69 199.91 170.41 200.56 169.92"/><polygon class="cls-b9" points="198.87 171.2 214.21 182.26 198.19 171.67 198.87 171.2"/><path class="cls-b9" d="m253.46,177.78s-11.95,2.25-25.46,7.91c0,0,17.18-7.99,26.28-8.62l-.82.7Z"/><path class="cls-b9" d="m254.62,179.34s-15.65,3.34-24.7,7.04c0,0,8.41-2.55,24.82-6.46l-.13-.58Z"/><path class="cls-b9" d="m202.44,168.42s11.55-.36,18.33,14.45c0,0-9.24-12.72-17.24-12.81l-1.09-1.64Z"/><polygon class="cls-b7" points="196.8 171.54 219.18 187.03 218.05 224.35 203.35 214.26 196.8 171.54"/><polygon class="cls-b7" points="227.33 225.97 229.92 188.99 228.63 188.99 226.14 225.88 227.33 225.97"/><path class="cls-b4" d="m200.79,197.55l-3.48,6.91c-1.24,2.47-.9,5.44.87,7.56l.59.7c1.79,2.14,4.7,3,7.37,2.17l3.87-1.2c1.49-.46,2.82-1.32,3.85-2.49l6.14-6.93c1.79-2.03,1.96-5.02.39-7.23l-.25-.35c-1.55-2.19-4.38-3.04-6.88-2.06l-4.94,1.93c-2.29.89-4.19,2.55-5.39,4.7l-1.22,2.29-.93-5.99Z"/><path class="cls-b4" d="m253.92,197.55l3.48,6.91c1.24,2.47.9,5.44-.87,7.56l-.59.7c-1.79,2.14-4.7,3-7.37,2.17l-3.87-1.2c-1.49-.46-2.82-1.32-3.85-2.49l-6.14-6.93c-1.79-2.03-1.96-5.02-.39-7.23l.25-.35c1.55-2.19,4.38-3.04,6.88-2.06l4.94,1.93c2.29.89,4.19,2.55,5.39,4.7l1.22,2.29.93-5.99Z"/><path class="cls-b16" d="m285.85,156.03s43.14,62.28,7.83,69.2c-35.31,6.92-41.29-2.6-41.29-2.6l13.94-15.16,19.52-51.45Z"/></g><ellipse class="cls-b12" cx="139.04" cy="323.11" rx="4.57" ry="1.64"/><ellipse class="cls-b12" cx="151.96" cy="317.37" rx="11.41" ry="4.1"/><ellipse class="cls-b12" cx="323.09" cy="358.51" rx="4.57" ry="1.64"/><ellipse class="cls-b12" cx="351.92" cy="356.87" rx="4.57" ry="1.64"/><ellipse class="cls-b12" cx="336.01" cy="352.76" rx="11.41" ry="4.1"/></svg>
+                </div>
+            </div>
+            <div class="relative max-w-md px-4 mx-auto sm:max-w-3xl sm:px-6 lg:px-0">
+                <div class="md:pt-12 sm:pt-6 lg:pt-20">
+                    <h2 class="text-3xl font-bold tracking-tight text-blue-superdark dark:text-gray-50 sm:text-4xl">
+                        Plazas can renew a vital part of life.
+                    </h2>
+                    <div class="mt-6 text-blue-superdark dark:text-white">
+                        <div class="mt-6 space-y-6 dark:text-white">
+                            <p> In a Society becoming steadily more privatized with private homes, cars, computers, offices and shopping centers, the public component of our lives is disappearing. 
+                            </p>
+                            <p>It is more and more important to make the cities inviting, so we can meet our fellow citizens face to face and experience directly through our senses.
+                            </p>
+                            <p>Public life in good quality public spaces is an important part of a democratic life and a full life.
+                            </p>
+                            <p class="flex justify-end">
+                                <i>- Famed planner, Jan Gehl</i>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- Sponsors section -->
-    <div class="max-w-md px-4 mx-auto md:pt-24 md:pb-16 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-        <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-24">
-            <div class="mt-12 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-0 lg:grid-cols-2">
-                {{ range .Site.Params.P3.Logos }}
-                <div class="flex justify-center col-span-1 px-8 py-8 bg-gray-50 dark:bg-gray-900/10">
-                    {{ if .image }}
-                    {{ $sponsor := resources.Get .image }}
-                    <img src="{{ $sponsor.RelPermalink }}" class="max-h-12 dark:invert" alt="{{ .alt }}" loading="lazy" />
-                    {{ else }}
-                    {{ $sponsor := resources.Get "images/global/sample-logo.svg" }}
-                    <img src="{{ $sponsor.RelPermalink }}" class="max-h-12 dark:invert" alt="{{ .alt }}" loading="lazy" />
-                    {{ end }}
-                </div>
-                {{ end }}
-            </div>
-            <div>
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-4xl">
-                    {{ .Site.Params.P3.Heading }}
-                </h2>
-                {{ range .Site.Params.P3.Content }}
-                <p class="max-w-3xl mt-6 text-lg leading-7 text-gray-900 dark:text-white">
-                    {{ .text }}
-                </p>
-                {{ end }}
-                {{ range .Site.Params.P3.Links }}
-                <div class="my-6">
-                    <a href="{{ .url }}" class="text-base font-medium text-primary-400 dark:text-primary-100">
-                        {{ .text }}&nbsp&rarr;
-                    </a>
-                </div>
-                {{ end }}
-            </div>
-        </div>
-    </div>
-
-    <!-- Blog section -->
-    <div class="relative px-1 pt-8 pb-4 bg-transparent lg:px-8 lg:pt-12 lg:mb-4 md:mt-12">
-        <div class="absolute inset-0">
-            <div class="bg-gray-200 dark:bg-gray-900/50 h-1/3 sm:h-2/3"></div>
-        </div>
-        <div class="relative px-2 mx-auto max-w-7xl">
-            <div class="text-center">
-                <h2 class="text-3xl font-black tracking-tight text-primary-500 dark:text-primary-300 sm:text-4xl">
-                    {{ .Site.Params.P4.Heading }}
-                </h2>
-                {{ range .Site.Params.P4.Content }}
-                <p class="max-w-2xl mx-auto mt-3 text-xl text-gray-500 dark:text-gray-300 sm:mt-4">
-                    {{ .text }}
-                </p>
-                {{ end }}
-            </div>
-
-            <div class="mx-auto text-gray-900 max-w-7xl dark:text-gray-50 md:px-1.5">
-                <div class="px-4 text-gray-900 dark:text-white not-prose dark:text-zinc-200">
-                    <div class="grid gap-4 mx-auto mt-12 mb-4 lg:max-w-none md:grid-cols-3">
-                        {{ range (.Paginator 3).Pages }}
-                        <div class="flex flex-col overflow-hidden rounded-lg shadow-lg bg-gray-50 dark:bg-gray-900">
-                            <a href="{{.Permalink}}">
-                                {{ with .Params.featured_image }}
-                                {{ with resources.Get . }}
-                                {{ $postimage := (.Resize "500x webp q90").RelPermalink }}
-                                <img src="{{ $postimage }}" class="object-fill overflow-hidden rounded-t-lg" width="100%" height="" loading="lazy" alt="{{ .Title }}" />
-
-                                {{ end }}
-                                {{ end }}
-                            </a>
-                            <div class="p-6">
-                                <div class="flex-1">
-                                    <a href="{{.Permalink}}" class="block mt-2 text-2xl font-black text-gray-900 dark:text-gray-200 hover:text-primary-600 dark:hover:text-primary-500 hover:underline">
-                                        {{ .Title }}
-                                    </a>
-                                    <p class="mt-3 text-base text-gray-900 dark:text-gray-300">
-                                        {{ .Params.summary }}
-                                    </p>
-                                </div>
-                                <div class="flex pt-6 font-medium text-primary-600 dark:text-primary-100 text-md">
-                                    <span class="pr-2 font-black">Tags:</span>
-                                    {{ range $elem_index, $elem_val := (.GetTerms "tags") }}
-                                    {{- if gt $elem_index 0 }}, {{ end -}}
-                                    <a href="{{ .Permalink }}" class="inline-flex items-center rounded-md bg-gray-300 hover:bg-primary-200 hover:text-black px-2.5 py-0.5 text-sm font-medium text-gray-900 ">{{ .LinkTitle }}</a>
-                                    {{- end -}}
-                                </div>
-                                <div class="flex items-center mt-6">
-                                    <div class="flex-shrink-0">
-                                        <span class="sr-only">{{ .Params.author }}</span>
-                                        {{ with .Params.authorimage }}
-                                        {{ with resources.Get . }}
-                                        {{ $authorimage := (.Resize "400x webp").RelPermalink }}
-                                        <img class="w-10 h-10 rounded-full" src="{{ $authorimage }}" alt="">
-                                        {{ end }}
-                                        {{ end }}
+    
+    <!-- Testimonials Section -->
+    <div id="testimonials-start" class="overflow-hidden sm:pt-6 lg:relative bg-orange-lightest">
+        <div class="max-w-md px-4 mx-auto md:pt-12 md:pb-12 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8  ">
+            <div class="min-w-screen flex items-center justify-center pb-2">
+                <div class="">
+                    <div class="w-full max-w-6xl mx-auto">
+                        <div class="text-center max-w-xl mx-auto mb-12">
+                            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-blue-superdark">What people are saying...</h1>
+                            <h3 class="text-xl mb-5 font-light mb-12">about plazas.</h3>
+                        </div>
+                        <div class="-mx-3 md:flex items-start">
+                            <div class="px-3 md:w-1/3">
+                                <div class="w-full mx-auto rounded-lg bg-blue-darkest text-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                                    <div class="w-full">
+                                        <p class="text-sm leading-tight"><span class="text-lg leading-none italic font-bold text-gray-400 mr-1">" </span>Spaces filled with familiar faces<br>
+                                        A place to see your favorite bassist<br>
+                                        Welcome all, and come to gather<br>
+                                        A public square to see what’s the matter?<br>  
+                                        Connect, embrace, relax, and chill<br>
+                                        Come to the plaza to get your fill<span class="text-lg leading-none italic font-bold text-gray-400 ml-1">"</span></p>
                                     </div>
-                                    <div class="pt-1 ml-3">
-                                        <p class="text-sm font-medium text-gray-900 dark:text-white">
-                                            {{ .Params.author }}
-                                        </p>
-                                        <div class="flex space-x-1 text-sm text-gray-500 dark:text-white">
-                                            <time datetime="2020-02-12">{{.Date.Format "2006-01-02"}}</time>
-                                            <span aria-hidden="true">&middot;</span>
-                                            <span>{{ math.Round (div (countwords .Content) 220.0) }}
-                                                min read</span>
+                                    <div class="w-full flex items-center">
+                                        <div class="flex-grow py-3">
+                                            <h6 class="font-bold text-sm uppercase text-white">- Caroline Wagner</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full mx-auto rounded-lg bg-blue-darkest text-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                                    <div class="w-full">
+                                        <p class="text-sm leading-tight"><span class="text-lg leading-none italic font-bold text-gray-400 mr-1">" </span>A+ product. What a feeling it is to be surrounded by others, emersed together in this thing called life. People on their way to work, friends catching up at a bench, strangers conversing with each other. Can’t wait to see more.<span class="text-lg leading-none italic font-bold text-gray-400 ml-1">"</span></p>
+                                    </div>
+                                    <div class="w-full flex items-center">
+                                        <div class="flex-grow py-3">
+                                            <h6 class="font-bold text-sm uppercase text-white">- Andres Perez</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-3 md:w-1/3">
+                                <div class="w-full mx-auto rounded-lg bg-blue-darkest text-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                                    <div class="w-full">
+                                        <p class="text-sm leading-tight"><span class="text-lg leading-none italic font-bold text-gray-400 mr-1">" </span>Plazas are the best! Where else can you have a delicious ice cream, walk in the park, and meet with a friend for people watching all in one place? Plazas really offer the best of all worlds, and we need more of them in our cities.<span class="text-lg leading-none italic font-bold text-gray-400 ml-1">"</span></p>
+                                    </div>
+                                    <div class="w-full flex items-center">
+                                        <div class="flex-grow py-3">
+                                            <h6 class="font-bold text-sm uppercase text-white">- Erica Martelly</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full mx-auto rounded-lg bg-blue-darkest text-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                                    <div class="w-full">
+                                        <p class="text-sm leading-tight"><span class="text-lg leading-none italic font-bold text-gray-400 mr-1">" </span>The plaza is a place to just be, in public. In an era where people are consistently growing more lonely and isolated, we need places to be invited into casual connection with each other, especially without the barriers of class between us. We need to let kids play and dogs sniff and girlies show off their outfits and songwriters test out their new music. We need plazas.<span class="text-lg leading-none italic font-bold text-gray-400 ml-1">"</span></p>
+                                    </div>
+                                    <div class="w-full flex items-center">
+                                        <div class="flex-grow py-3">
+                                            <h6 class="font-bold text-sm uppercase text-white">- Ella Rasp</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-3 md:w-1/3">
+                                <div class="w-full mx-auto rounded-lg bg-blue-darkest text-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                                    <div class="w-full">
+                                        <p class="text-sm leading-tight"><span class="text-lg leading-none italic font-bold text-gray-400 mr-1">" </span>Five years ago, I moved without knowing a single person.  I remember looking around at lots of unknown faces, and I had to work hard to seek out places to meet people.  A turning point for me was the first time that I saw someone I knew out and about in my neighborhood.  They recognized me, and we talked for a few minutes.  Moments like that turn a place you live into a neighborhood.  However, the only way these interactions can happen is if we create spaces for people to interact with each other.  I love People for Plazas and their mission! <span class="text-lg leading-none italic font-bold text-gray-400 ml-1">"</span></p>
+                                    </div>
+                                    <div class="w-full flex items-center">
+                                        <div class="flex-grow py-3">
+                                            <h6 class="font-bold text-sm uppercase text-white">- Amy Goldstein</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full mx-auto rounded-lg bg-blue-darkest text-white border border-gray-200 p-5 text-gray-800 font-light mb-6">
+                                    <div class="w-full">
+                                        <p class="text-sm leading-tight"><span class="text-lg leading-none italic font-bold text-gray-400 mr-1">" </span>Plazas are full of people and make me slow down. For this alone, I love them.<span class="text-lg leading-none italic font-bold text-gray-400 ml-1">"</span></p>
+                                    </div>
+                                    <div class="w-full flex items-center">
+                                        <div class="flex-grow py-3">
+                                            <h6 class="font-bold text-sm uppercase text-white">- Matt Murray</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {{ end }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{ if not .Site.Params.Disable_stay_uptodate}}
     <!-- CTA section -->
-    <div class="relative pb-16 mt-6">
+    <div id="advocate" class="relative py-16 bg-blue-dark">
         <div class="max-w-md mx-auto px-7 sm:max-w-3xl lg:max-w-7xl">
-            <div class="relative px-6 py-10 overflow-hidden shadow-xl bg-primary-500 rounded-2xl sm:px-12 sm:py-20">
+            <div class="relative px-6 py-10 overflow-hidden shadow-xl bg-blue-medium rounded-2xl sm:px-12 sm:py-20">
                 <div aria-hidden="true" class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0">
                     <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1463 360" loading="lazy">
-                        <path class="text-primary-600 text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z" />
-                        <path class="text-primary-600 text-opacity-40" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z" />
+                        <path class="text-blue-pleasantdark text-opacity-40" fill="currentColor" d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z" />
+                        <path class="text-blue-pleasantdark text-opacity-40" fill="currentColor" d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z" />
                     </svg>
                 </div>
                 <div class="relative">
                     <div class="sm:text-center">
                         <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                            {{ .Site.Params.P5.Heading }}
+                            Speak up!
                         </h2>
-                        {{ range .Site.Params.P5.Content }}
+                        
                         <p class="max-w-2xl mx-auto mt-6 text-lg text-primary-100">
-                            {{ .text }}
+                            Call or email your representatives and ask them to prioritize plazas.
                         </p>
-                        {{ end }}
+                        
                     </div>
-                    <form action="{{ .Site.Params.P5.Action }}" class="mt-12 sm:mx-auto sm:flex sm:max-w-lg">
+                    <form action="" id="addressform" class="mt-12 sm:mx-auto sm:flex sm:max-w-lg">
                         <div class="flex-1 min-w-0">
-                            <label for="cta-email" class="sr-only">{{ .Site.Params.P5.Label }}</label>
-                            <input id="cta-email" type="email" class="block w-full px-5 py-3 text-base text-gray-900 placeholder-gray-500 border border-transparent rounded-md shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500" placeholder="{{ .Site.Params.P5.Placeholder }}">
+                            <label for="cta-address" class="sr-only">Address</label>
+                            <input id="cta-address" name="cta-address" type="address" class="block w-full px-5 py-3 text-base text-gray-900 placeholder-gray-500 border border-transparent rounded-md shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-dark" placeholder="Home/voting address">
                         </div>
                         <div class="mt-4 sm:mt-0 sm:ml-3">
                             <button type="submit" class="block w-full px-5 py-3 text-base font-medium text-white bg-gray-900 border border-transparent rounded-md shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500 sm:px-10">
-                                {{ .Site.Params.P5.Button }}
+                                Find My Reps
                             </button>
                         </div>
                     </form>
+                    <div id="results-container" class="hidden mt-12 sm:mx-auto max-w-2xl rounded-lg">
+                        <div class="text-2xl mb-4">State, Regional, and City Representatives:</div>
+                        <div id="results-area" ></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    {{ end }}
+<script>
+
+    document.querySelector('#addressform').addEventListener("submit", (e) => {
+        e.preventDefault()
+        const resultsArea = document.getElementById("results-area");
+        resultsArea.innerHTML = '';
+        const resultsContainer = document.getElementById("results-container");
+        resultsContainer.classList.remove("hidden");
+
+        let formVal = document.querySelector('input[name="cta-address"]').value
+        let ENCODED_FORM_ADDRESS = encodeURIComponent(formVal)
+        let API_KEY = 'AIzaSyCHSTjaq73n9FqeHS_fkDaZZ5ywjdMjpc4';
+
+        fetch(`https://civicinfo.googleapis.com/civicinfo/v2/representatives?address=${ENCODED_FORM_ADDRESS}&includeOffices=true&levels=locality&levels=subLocality1&levels=subLocality2&levels=special&levels=administrativeArea1&levels=regional&levels=administrativeArea2&roles=headOfGovernment&roles=executiveCouncil&roles=headOfState&roles=legislatorUpperBody&roles=legislatorLowerBody&key=${API_KEY}`)           
+        .then(response => response.json())
+        .then(data => {
+            data.officials.forEach( (official, i) => {
+                const resultNode = document.createElement("div");
+                const nameNode = document.createElement("div");
+                nameNode.innerHTML = `<div class="rep-name">${data.offices[i].name}: ${official.name}</div>`;
+                resultNode.appendChild(nameNode);
+                if (official.emails) {
+                    const emailNode = document.createElement("div");
+                    emailNode.innerHTML = `<div class="rep-email"> ✉️  ${official.emails[0]}</div>`;
+                    resultNode.appendChild(emailNode);
+                } 
+                if (official.phones) {
+                    const phoneNode = document.createElement("div");
+                    phoneNode.innerHTML = `<div class="rep-phone"> 📞  ${official.phones[0]}</div>`;
+                    resultNode.appendChild(phoneNode);
+                }
+                resultsArea.appendChild(resultNode);
+            })
+            const script = document.createElement("div");
+            script.innerHTML = `
+            <h3 class="text-2xl script-header">
+                Use this script or write your own!
+            </h3>
+            <blockquote class="script-blockquote">
+                <p>
+                    Hello [Representative's Name], my name is [Your Name], and I'm a resident of [Your City/Town]. 
+                </p>
+                <p>
+                    I'd like to bring to your attention the shortage of public spaces, especially plazas, in our community. Plazas serve as hubs where people can gather, connect, and build a stronger sense of community. 
+                </p>
+                <p>
+                    I kindly urge you to support initiatives that lead to the creation of more plazas in our community. Your advocacy on this matter can truly make a difference. 
+                </p>
+                <p>
+                    Thank you for your time and consideration. I would be more than happy to provide additional information and discuss this further. You can reach me at [Your Email/Phone]. 
+                </p>
+            </blockquote>`;
+            resultsContainer.appendChild(script)
+        });
+    })
+</script>
 
 </main>
 {{ end }}

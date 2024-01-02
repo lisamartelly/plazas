@@ -17,7 +17,7 @@ params:
   og_image: /images/tailbliss-cover.png
   moto: "Super Fast, and Flexible"
   description: "A Hugo theme built with love, using TailwindCSS 3, Alpine.JS, and Hugo Pipes. Images are optimized for use with Hugo Pipes for WebP format."
-  disable_theme_toggle: false
+  disable_theme_toggle: true
   disable_stay_uptodate: true
 
   p1:
